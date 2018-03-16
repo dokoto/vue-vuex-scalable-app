@@ -1,0 +1,59 @@
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-align-first-corners {
+  justify-content: space-between;
+}
+
+.flex-align-first-center {
+  justify-content: center;
+}
+
+.grow-2 {
+  flex-grow: 2;
+}
+
+.grow-0 {
+  flex-grow: 0;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-align-second-center {
+    align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.padding-2x {
+  padding: 2%;
+}
+
+$colorGrey1: #0a0909;
+$colorGrey2: #c5c4c4;
+$colorGrey3: #e4e3e3;
+$colorGrey4: #ececec;
+$colorWhite0: white;
+$colorWhite1: #f7f7f0;
+$colorWhite2: #f9f9f9;
+$colorDarkGrey1: #848181;
+$colorDarkGrey2: #828080;
+$colorDarkGrey3: #7b656d;
+$colorPastelOrange: rgb(253, 202, 162);
+$colorPastelPink: rgb(251, 182, 202);
+$colorPastelBlue: rgb(199, 236, 255);
+$colorPastelYellow: rgb(255, 237, 120);
+$colorPastelGreen0: #77dd77;
+$colorBlue1: #6cc0e5;
+$colorGreen0: #4edc0a;
