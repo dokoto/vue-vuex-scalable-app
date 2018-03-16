@@ -39,6 +39,7 @@ function parseNewUser(env, body) {
   }
 
   users.push(user);
+  console.log('Users DB', JSON.stringify(users, 4, false));
   return {
     code: 201,
     user: view(user, ['access_token', 'user']),
@@ -60,11 +61,13 @@ function parseUser(env, body) {
 
   const user = users.find(item => item.user === body.user);
   if (!user || user.password !== body.password) {
+    console.log('User no found', body.user);
     return {
-      code: 404,
+      code: 401,
     };
   }
 
+  console.log('User found', user);
   user.access_token = randtoken.generate(16);
   return {
     code: 200,

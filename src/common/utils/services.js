@@ -1,23 +1,41 @@
 import * as paths from './paths';
 
-export function doLogin(user, password) {
-  return fetch(paths.login, {
+function createPostJsonBody(params) {
+  return {
     method: 'POST',
-    body: JSON.stringify({
-      user,
-      password,
-      access_token: process.env.MASTER_TOKEN,
-    }),
-  }).then(response => response.json());
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  };
 }
 
-export function signUp(user, password) {
-  return fetch(paths.login, {
-    method: 'POST',
-    body: JSON.stringify({
-      user,
-      password,
-      access_token: process.env.MASTER_TOKEN,
-    }),
-  }).then(response => response.json());
+function handleServiceResponse(response) {
+  if (response.status === 200 || response.status === 201) {
+    return response.json();
+  }
+  return {
+    error: {
+      text: response.statusText,
+      code: response.status,
+    },
+  };
+}
+
+export function doLogin(user, password) {
+  return fetch(paths.login, createPostJsonBody({
+    user,
+    password,
+    access_token: process.env.VUE_APP_MASTER_TOKEN,
+  })).then(handleServiceResponse);
+}
+
+export function signUp(user, email, password) {
+  return fetch(paths.signup, createPostJsonBody({
+    user,
+    email,
+    password,
+    access_token: process.env.VUE_APP_MASTER_TOKEN,
+  })).then(handleServiceResponse);
 }

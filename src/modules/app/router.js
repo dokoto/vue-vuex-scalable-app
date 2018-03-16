@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../home/view.vue';
 import Auth from '../auth/view.vue';
+
+// Lazy loading, allow split webpack code
+const Home = () => import(/* webpackChunkName: "Home" */'../home/view.vue');
+const HeavyMod = () => import(/* webpackChunkName: "Fake" */'../heavyMod/view.vue');
 
 Vue.use(Router);
 
@@ -18,6 +21,11 @@ export default new Router({
       name: 'home',
       path: '/home',
       components: { container: Home },
+    },
+    {
+      name: 'HeavyMod',
+      path: '/HeavyMod',
+      components: { container: HeavyMod },
     },
   ],
 });
