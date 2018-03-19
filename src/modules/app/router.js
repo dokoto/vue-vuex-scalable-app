@@ -26,6 +26,6 @@ export default new Router({
       name: 'HeavyMod',
       path: '/HeavyMod',
       components: { container: HeavyMod },
-    }
-  ]
+    },
+  ],
 });

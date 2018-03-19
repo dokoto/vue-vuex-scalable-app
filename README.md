@@ -1,30 +1,67 @@
-# base-architecture-2
-
-> New OKN-2018
+# Re-Design
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-npm install
+$> npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+$> npm run dev
 
 # build for production with minification
-npm run build
+$> npm run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+$> npm run build --report
 
 # run unit tests
-npm run unit
+$> npm run unit
 
 # run e2e tests
-npm run e2e
+$> npm run e2e
 
 # run all tests
-npm test
+$> npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Cli Extended options
+
+``` bash
+# show all options
+$> npm run
+
+# run mocker restfull server
+$> npm run mocker
+
+# deploy dist built to test it
+$> npm run deploy
+```
+
+# Architecture
+- Generated with [vue-cli](https://github.com/vuejs/vue-cli) stable (2.9.3)
+- App backbone: [vue](https://vuejs.org/) + [vuex](https://github.com/vuejs/vuex) + [vue-router](https://router.vuejs.org/en/)+ [vue-i18n](https://github.com/kazupon/vue-i18n)
+- Builder backbone: [webpack](https://webpack.js.org/) + [babel](https://babeljs.io/) + [eslint(airbnb)](https://github.com/airbnb/javascript)
+- RestFull mocker: [json-server](https://github.com/typicode/json-server)
+- Test backbone: [TDD-Jest](https://facebook.github.io/jest/) [E2N-Cypress](https://www.cypress.io/)
+
+# Features
+- [Splited code generation](https://webpack.js.org/guides/code-splitting/)
+- [Lazy routing module loading](https://router.vuejs.org/en/advanced/lazy-loading.html)
+- [Gzipped compressed modules](https://github.com/webpack-contrib/compression-webpack-plugin)
+- Conditional toggle route module loading
+- [Component oriented programming](https://medium.com/@dan.shapiro1210/understanding-component-based-architecture-3ff48ec0c238)
+- [State pattern](https://medium.com/@patrickackerman/the-state-pattern-with-vanilla-javascript-e40ff83e85d0)
+- SCSS Style postprocessing
+
+# Currently Scaffolding
+- Three modules: App, Auth, Home, HeavyModule
+- Modules have local components and logic
+- Cross components
+- Cross base style
+- Cross utils
+- Centralizated services calls and paths
+
+# Vue facts
+- [Performance](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)
+- [Comparison with other frameworks](https://vuejs.org/v2/guide/comparison.html)
