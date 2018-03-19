@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import VueI18n from 'vue-i18n';
 import * as languaje from './common/utils/languaje';
-import App from './modules/app/App.vue';
+import App from './modules/app/App';
 import router from './modules/app/router';
 import store from './modules/app/logic/store';
 
