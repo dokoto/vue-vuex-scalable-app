@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n';
 import * as languaje from './common/utils/languaje';
 import App from './modules/app/App.vue';
 import router from './modules/app/router';
-import store from './modules/app/store';
+import store from './modules/app/logic/store';
 
 sync(store, router);
 Vue.use(VueI18n);

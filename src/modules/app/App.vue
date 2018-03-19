@@ -14,6 +14,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  created: function() {
+    this.$store.dispatch('app/getToogles');
+  }
+}
+</script>
+
+
 <style lang="scss">
 @import "../../common/styles/base.scss";
 

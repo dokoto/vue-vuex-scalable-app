@@ -15,6 +15,9 @@ const es = {
     buttonSignIn: 'Autenticarse',
     buttonSignUp: 'Registrarse',
   },
+  general: {
+    disableModuleMessage: 'Modulo temporalmente no disponible',
+  },
 };
 
 export default es;

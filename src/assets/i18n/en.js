@@ -15,6 +15,9 @@ const en = {
     buttonSignIn: 'Do Login',
     buttonSignUp: 'Registrer',
   },
+  general: {
+    disableModuleMessage: 'Temporal disabled module',
+  },
 };
 
 export default en;

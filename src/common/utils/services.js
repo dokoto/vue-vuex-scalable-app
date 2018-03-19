@@ -39,3 +39,7 @@ export function signUp(user, email, password) {
     access_token: process.env.VUE_APP_MASTER_TOKEN,
   })).then(handleServiceResponse);
 }
+
+export function getToogles() {
+  return fetch(paths.toggles).then(handleServiceResponse);
+}
