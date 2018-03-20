@@ -75,7 +75,7 @@ $> npm run deploy
 - How to create a component with i18n text inside and check it
 - How create component with props
 - How create component with sub-components(slots) inside, and check sub-components
-- How component events and check what dispacher were called
+- How trigger component events and check what dispachers were called
 - How test async vuex actions with mocker datas
 
 # Vue facts
