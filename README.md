@@ -62,6 +62,12 @@ $> npm run deploy
 - Cross utils
 - Centralizated services calls and paths
 
+# TDD-JEST Samples of
+- How to debug with chrome devtools
+- How to create a component with i18n text inside and check it
+- How create component with props
+- How create component with sub-components(slots) inside, and check sub-components
+
 # Vue facts
 - [Performance](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)
 - [Comparison with other frameworks](https://vuejs.org/v2/guide/comparison.html)
