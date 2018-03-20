@@ -27,6 +27,7 @@ function parseNewUser(masterToken, body) {
   const user = {
     user: body.user,
     password: body.password,
+    email: body.email,
     access_token: randtoken.generate(16)
   };
 
@@ -41,7 +42,7 @@ function parseNewUser(masterToken, body) {
   users.push(user);
   return {
     code: 201,
-    user: view(user, ['access_token', 'user'])
+    user: view(user, ['access_token', 'user', 'email'])
   };
 }
 
@@ -70,7 +71,7 @@ function parseUser(masterToken, body) {
   user.access_token = randtoken.generate(16);
   return {
     code: 200,
-    user: view(user, ['access_token', 'user'])
+    user: view(user, ['access_token', 'user', 'email'])
   };
 }
 

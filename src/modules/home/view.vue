@@ -10,7 +10,9 @@
 export default {
   methods: {
     logOut() {
-       this.$store.dispatch('auth/logOut');
+      this.$store
+        .dispatch("auth/logOut")
+        .then(route => this.$router.push(route));
     }
   },
   data() {

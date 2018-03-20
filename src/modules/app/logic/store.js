@@ -14,19 +14,19 @@ const actions = {
   async getToogles({ commit }) {
     const toggles = await getToogles();
     commit(types.RECEIVE_TOGGLES, toggles);
-  },
+  }
 };
 
 const mutations = {
   [types.RECEIVE_TOGGLES](currState, toggles) {
     currState.toggles = toggles;
-  },
+  }
 };
 
 const app = {
   namespaced: true,
   mutations,
-  actions,
+  actions
 };
 
 const store = new Vuex.Store({
@@ -34,9 +34,9 @@ const store = new Vuex.Store({
   modules: {
     app,
     home,
-    auth,
+    auth
   },
-  strict: process.env.ENV !== 'production',
+  strict: process.env.ENV !== 'production'
 });
 
 export default store;

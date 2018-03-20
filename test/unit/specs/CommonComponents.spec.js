@@ -1,4 +1,3 @@
-import 'vue';
 import { mount, createLocalVue } from 'vue-test-utils';
 import VueI18n from 'vue-i18n';
 import * as languaje from '@/common/utils/languaje';

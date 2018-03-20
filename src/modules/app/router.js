@@ -15,17 +15,17 @@ export default new Router({
     {
       name: 'Auth',
       path: '/',
-      components: { container: Auth },
+      components: { container: Auth }
     },
     {
       name: 'home',
       path: '/home',
-      components: { container: toggle('home', Home) },
+      components: { container: toggle('home', Home) }
     },
     {
       name: 'HeavyMod',
       path: '/HeavyMod',
-      components: { container: HeavyMod },
-    },
-  ],
+      components: { container: HeavyMod }
+    }
+  ]
 });

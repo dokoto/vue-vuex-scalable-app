@@ -1,44 +1,45 @@
-import router from '../../app/router';
 import * as services from '../../../common/utils/services';
 import * as types from './types';
-
 
 const state = {
   user: {},
   isAuth: false,
   error: {},
-  mode: 'signin',
+  mode: 'signin'
 };
 
-
-const getters = {};
-
 const actions = {
-  async doLogin({ commit }, { username, password }) {
-    const response = await services.doLogin(username, password);
-    if (response.error) {
-      commit(types.LOGIN_ERROR, { error: response.error });
-    } else {
-      commit(types.LOGIN_SUCCESS, { user: response });
-      router.push({ name: 'home' });
-    }
+  doLogin({ commit }, { username, password }) {
+    return new Promise(async resolve => {
+      const response = await services.doLogin(username, password);
+      if (response.error) {
+        commit(types.LOGIN_ERROR, { error: response.error });
+      } else {
+        commit(types.LOGIN_SUCCESS, { user: response });
+        resolve({ name: 'home' });
+      }
+    });
   },
-  async registrer({ commit }, { username, email, password }) {
-    const response = await services.signUp(username, email, password);
-    if (response.error) {
-      commit(types.LOGIN_ERROR, { error: response.error });
-    } else {
-      commit(types.LOGIN_SUCCESS, { user: response });
-      router.push({ name: 'home' });
-    }
+  registrer({ commit }, { username, email, password }) {
+    return new Promise(async resolve => {
+      const response = await services.signUp(username, email, password);
+      if (response.error) {
+        commit(types.LOGIN_ERROR, { error: response.error });
+      } else {
+        commit(types.LOGIN_SUCCESS, { user: response });
+        resolve({ name: 'home' });
+      }
+    });
   },
   toogleToSignUp({ commit }) {
     commit(types.TOOGLE_LOGIN_MODE);
   },
   logOut({ commit }) {
-    commit(types.LOGOUT);
-    router.push({ name: 'login' });
-  },
+    return new Promise(resolve => {
+      commit(types.LOGOUT);
+      resolve({ name: 'login' });
+    });
+  }
 };
 
 const mutations = {
@@ -60,13 +61,12 @@ const mutations = {
     currState.user = {};
     currState.error = {};
     currState.mode = 'signin';
-  },
+  }
 };
 
 export default {
   namespaced: true,
   state,
-  getters,
   mutations,
-  actions,
+  actions
 };

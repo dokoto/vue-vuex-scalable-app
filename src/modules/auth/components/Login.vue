@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 import Input from "../../../common/components/Input";
 import Card from "../../../common/components/Card";
 
@@ -26,28 +26,34 @@ export default {
   props: {
     mode: {
       type: String,
-      default: 'login',
-    },
+      default: "signin"
+    }
   },
   computed: {
-    ...mapState('auth', {
-      error: state => state.error,
-    }),
+    ...mapState("auth", {
+      error: state => state.error
+    })
   },
   methods: {
     processForm(ev) {
       ev.preventDefault();
-      if (this.mode === 'signin') {
-        this.$store.dispatch("auth/doLogin", {
-          username: ev.currentTarget.elements["username"].value,
-          password: ev.currentTarget.elements["password"].value
-        });
+      if (this.mode === "signin") {
+        this.$store
+          .dispatch("auth/doLogin", {
+            username: ev.currentTarget.elements["username"].value,
+            password: ev.currentTarget.elements["password"].value
+          })
+          .then(route => this.$router.push(route))
+          .catch(err => err);
       } else {
-        this.$store.dispatch("auth/registrer", {
-          username: ev.currentTarget.elements["username"].value,
-          email: ev.currentTarget.elements["email"].value,
-          password: ev.currentTarget.elements["password"].value
-        });
+        this.$store
+          .dispatch("auth/registrer", {
+            username: ev.currentTarget.elements["username"].value,
+            email: ev.currentTarget.elements["email"].value,
+            password: ev.currentTarget.elements["password"].value
+          })
+          .then(route => this.$router.push(route))
+          .catch(err => err);
       }
     }
   },
@@ -58,7 +64,7 @@ export default {
         password: this.$i18n.t("login.password"),
         email: this.$i18n.t("login.email"),
         buttonSignUp: this.$i18n.t("login.buttonSignUp"),
-        buttonSignIn: this.$i18n.t("login.buttonSignIn"),
+        buttonSignIn: this.$i18n.t("login.buttonSignIn")
       }
     };
   }
@@ -72,7 +78,7 @@ export default {
 .error {
   background-color: red;
   color: yellow;
-  font-size: 2.0em;
+  font-size: 2em;
 }
 
 label {

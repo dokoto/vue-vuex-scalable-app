@@ -47,6 +47,8 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["currState"] }],
-    'comma-dangle': ["error", "never"]
+    'comma-dangle': ["error", "never"],
+    'no-confusing-arrow': ["error", {"allowParens": true}],
+    'arrow-parens': ["error", "as-needed"]
   }
 }
