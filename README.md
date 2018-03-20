@@ -6,6 +6,14 @@
 # install dependencies
 $> npm install
 
+# Check correct dependencies
+$> npm ls --depth=0
+
+# If the last command throw "npm ERR! missing" run:
+$> npm i --no-optional
+$> npm dedupe
+$> npm ls --depth=0
+
 # serve with hot reload at localhost:8080
 $> npm run dev
 
