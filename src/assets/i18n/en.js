@@ -17,6 +17,7 @@ const en = {
   },
   general: {
     disableModuleMessage: 'Temporal disabled module',
+    placeholder: 'Something cool',
   },
 };
 

@@ -17,6 +17,7 @@ const es = {
   },
   general: {
     disableModuleMessage: 'Modulo temporalmente no disponible',
+    placeholder: 'algo chulo',
   },
 };
 
