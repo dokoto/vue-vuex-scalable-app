@@ -1,0 +1,9 @@
+{
+  "fixturesFolder": "test/e2e/fixtures",
+  "integrationFolder": "test/e2e/specs",
+  "screenshotsFolder": "test/e2e/screenshots",
+  "videosFolder": "test/e2e/videos",
+  "supportFile": "test/e2e/support/index.js",
+  "baseUrl": "http://localhost:5000",
+  "videoRecording": false
+}
