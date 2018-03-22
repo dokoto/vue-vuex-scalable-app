@@ -7,11 +7,11 @@ export default {
   data() {
     return {
       literals: {
-        message: this.$i18n.t("general.disableModuleMessage")
+        message: this.$i18n.t('general.disableModuleMessage')
       }
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

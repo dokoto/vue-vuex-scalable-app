@@ -14,14 +14,5 @@ export default {
       default: 'text'
     }
   }
-}
+};
 </script>
-
-
-
-<style lang="scss" scoped>
-.input {
-
-}
-</style>
-

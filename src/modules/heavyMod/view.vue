@@ -5,8 +5,9 @@
 </template>
 
 <script>
-import Fake from './components/fake.vue';
+import Fake from './components/fake';
+
 export default {
-  components: { Fake },
-}
+  components: { Fake }
+};
 </script>

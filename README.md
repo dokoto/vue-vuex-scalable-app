@@ -98,7 +98,7 @@ $> npm run e2e-local
 - How test async vuex actions with mocker datas
 
 # E2E-Crypess Samples created
-- Hoe to inspect with Chrome devTools [Debug docs](https://docs.cypress.io/guides/guides/debugging.html#Using){:target="_blank"}
+- Hoe to inspect with Chrome devTools [Debug docs](https://docs.cypress.io/guides/guides/debugging.html#Using)
 - Register a new user and finish session
 - Login with an existing user and finish session
 - Login with an fake user and get an error

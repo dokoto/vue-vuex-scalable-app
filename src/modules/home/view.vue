@@ -1,7 +1,10 @@
 <template>
-  <section id="home" class="home-container">
+  <section id="home"
+           class="home-container">
     <p class="title flex-row flex-align-first-center">{{ literals.title }}</p>
-    <a href="#" @click="logOut" class="logout">{{ literals.logout }}</a>
+    <a href="#"
+       @click="logOut"
+       class="logout">{{ literals.logout }}</a>
   </section>
 </template>
 
@@ -11,15 +14,15 @@ export default {
   methods: {
     logOut() {
       this.$store
-        .dispatch("auth/logOut")
+        .dispatch('auth/logOut')
         .then(route => this.$router.push(route));
     }
   },
   data() {
     return {
       literals: {
-        title: this.$i18n.t("home.title"),
-        logout: this.$i18n.t("home.logout")
+        title: this.$i18n.t('home.title'),
+        logout: this.$i18n.t('home.logout')
       }
     };
   }
@@ -27,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../common/styles/base.scss";
+@import '../../common/styles/base.scss';
 
 .home-container {
   height: 100%;

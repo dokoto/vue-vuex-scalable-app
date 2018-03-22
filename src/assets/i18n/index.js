@@ -3,7 +3,7 @@ import es from './es';
 
 const messages = {
   en,
-  es,
+  es
 };
 
 export default messages;

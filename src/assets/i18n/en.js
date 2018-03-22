@@ -1,24 +1,24 @@
 const en = {
   home: {
     title: 'OKN-2018: The new awesome design',
-    logout: 'LogOut',
+    logout: 'LogOut'
   },
   auth: {
     title: 'Login',
     signup: 'Sing Up',
-    signin: 'Sign In',
+    signin: 'Sign In'
   },
   login: {
     user: 'User',
     password: 'Password',
     email: 'Email',
     buttonSignIn: 'Do Login',
-    buttonSignUp: 'Registrer',
+    buttonSignUp: 'Registrer'
   },
   general: {
     disableModuleMessage: 'Temporal disabled module',
-    placeholder: 'Something cool',
-  },
+    placeholder: 'Something cool'
+  }
 };
 
 export default en;

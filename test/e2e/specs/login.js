@@ -4,7 +4,8 @@
  * - Ejecutamos $> npm run e2e-local
  * - F12
  * - Ejecutamos el spec que deseamos depurar
- * - Y nos parara en el codigo de cypress, buscamos con CTRL+P nuestro fichero test/e2e/speces/login.js
+ * - Y nos parara en el codigo de cypress, buscamos con CTRL+P
+ *   nuestro fichero test/e2e/speces/login.js
  * - Ponemos un break-point y "pa lante"
  */
 const user = {
@@ -84,5 +85,4 @@ describe('Login with an fake user and get an error', () => {
   it('Check get an unAuthorized message', () => {
     cy.get('.error-text').should('contain', 'Unauthorized');
   });
-
 });

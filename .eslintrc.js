@@ -49,6 +49,9 @@ module.exports = {
     'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["currState"] }],
     'comma-dangle': ["error", "never"],
     'no-confusing-arrow': ["error", {"allowParens": true}],
-    'arrow-parens': ["error", "as-needed"]
+    'arrow-parens': ["error", "as-needed"],
+    'object-shorthand': 0,
+    'space-before-function-paren': 0,
+    'func-names': 0
   }
 }

@@ -19,12 +19,12 @@ export default {
   created: function() {
     this.$store.dispatch('app/getToogles');
   }
-}
+};
 </script>
 
 
 <style lang="scss">
-@import "../../common/styles/base.scss";
+@import '../../common/styles/base.scss';
 
 body,
 html {
@@ -36,7 +36,7 @@ html {
 body,
 input,
 textarea {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .okn {
   width: 100%;
