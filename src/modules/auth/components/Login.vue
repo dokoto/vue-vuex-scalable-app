@@ -89,6 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../common/styles/base.scss';
 .login {
   margin-top: 20%;
 }

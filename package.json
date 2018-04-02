@@ -18,7 +18,8 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js",
     "mocker": "node test/json-server/mocker.js",
-    "deploy": "node_modules/serve/bin/serve.js -s dist"
+    "deploy": "node_modules/serve/bin/serve.js -s dist",
+    "storybook": "start-storybook -p 9001 -c test/storybook"
   },
   "dependencies": {
     "vue": "^2.5.2",
@@ -29,6 +30,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
+    "@storybook/vue": "^3.4.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",

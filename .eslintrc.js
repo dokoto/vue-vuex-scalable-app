@@ -52,6 +52,7 @@ module.exports = {
     'arrow-parens': ["error", "as-needed"],
     'object-shorthand': 0,
     'space-before-function-paren': 0,
-    'func-names': 0
+    'func-names': 0,
+    'global-require': 0
   }
 }
