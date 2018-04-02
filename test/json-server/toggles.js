@@ -1,14 +1,7 @@
-
 const toggles = {
   home: true,
-  HeavyMod: false,
+  HeavyMod: false
 };
-
-function checkToken(masterToken, body) {
-  if (masterToken !== body.access_token) {
-    res.status(401);
-  }
-}
 
 module.exports = function addRoutes(masterToken, server) {
   server.get('/toggles', (req, res) => {

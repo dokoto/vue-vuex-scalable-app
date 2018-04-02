@@ -21,7 +21,6 @@
     "deploy": "node_modules/serve/bin/serve.js -s dist"
   },
   "dependencies": {
-    "lodash": "^4.17.5",
     "vue": "^2.5.2",
     "vue-i18n": "^7.6.0",
     "vue-router": "^3.0.1",
