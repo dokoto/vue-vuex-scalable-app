@@ -63,6 +63,14 @@ $> npm run e2e-local
 # run e2e on visual mode with local config
 $> npm run e2e-local
 
+# run storybook server
+$> npm run storybook
+
+# Generate JSDoc documentaion en dist/
+$> npm run generate-jsdocs
+
+# Deploy JSDoc documentaion
+$> npm run docs-deploy
 ```
 
 # Architecture
@@ -80,6 +88,9 @@ $> npm run e2e-local
 - [Component oriented programming](https://medium.com/@dan.shapiro1210/understanding-component-based-architecture-3ff48ec0c238)
 - [State pattern](https://medium.com/@patrickackerman/the-state-pattern-with-vanilla-javascript-e40ff83e85d0)
 - SCSS Style postprocessing
+- [Storybook component modeling and testing tool](https://storybook.js.org/)
+- [JSDoc3 documentation generator](http://usejsdoc.org/)
+- [DocDash JSDoc template](https://github.com/clenemt/docdash)
 
 # Currently Scaffolding
 - Three modules: App, Auth, Home, HeavyModule
@@ -102,6 +113,12 @@ $> npm run e2e-local
 - Register a new user and finish session
 - Login with an existing user and finish session
 - Login with an fake user and get an error
+
+# StoryBook
+- [Readme Addon](https://github.com/tuchk4/storybook-readme) Allow show markdown like documentarion close to component
+- [Viewport Addon](https://github.com/storybooks/storybook/tree/master/addons/viewport) Add responsive tools to test the component
+- [Knobs Addon](https://www.npmjs.com/package/@storybook/addon-knobs) Add props inteface for components. Easy way to populate props from UI
+- [Options Addon](https://github.com/storybooks/storybook/tree/master/addons/options) Allow configure UI interface details
 
 # Vue facts
 - [Performance](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)
