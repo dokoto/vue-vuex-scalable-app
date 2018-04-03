@@ -6,5 +6,6 @@
 
 <style lang="scss" scoped>
 .card {
+  width: 90%;
 }
 </style>
