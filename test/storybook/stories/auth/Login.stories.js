@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import 'vue';
 import VueI18n from 'vue-i18n';
 import { storiesOf } from '@storybook/vue';
 import { withReadme } from 'storybook-readme';

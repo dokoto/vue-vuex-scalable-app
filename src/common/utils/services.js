@@ -1,3 +1,7 @@
+/**
+ * @module Common/Utils/sevices
+ */
+
 import * as paths from './paths';
 
 function createPostJsonBody(params) {
@@ -23,6 +27,15 @@ function handleServiceResponse(response) {
   };
 }
 
+/**
+ * @function doLogin
+ * @description Login user
+ * @param {String} user
+ * @param {String} password
+ * @return {Object} Service response
+ * @example
+ * const response = await doLogin(username, password);
+ */
 export function doLogin(user, password) {
   return fetch(
     paths.login,
@@ -34,6 +47,16 @@ export function doLogin(user, password) {
   ).then(handleServiceResponse);
 }
 
+/**
+ * @function signUp
+ * @description Create a new user
+ * @param {String} user
+ * @param {String} email
+ * @param {String} password
+ * @return {Object} Service response
+ * @example
+ * const response = await signUp(username, email, password);
+ */
 export function signUp(user, email, password) {
   return fetch(
     paths.signup,
