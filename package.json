@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "start-local-dev": "concurrently --names \"MOCKER,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run start\"",
-    "start-local-pro": "concurrently --names \"MOCKER,DEPLOY\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run deploy\"",
+    "start-local-dev": "nconcurrently --names \"MOCKER,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run start\"",
+    "start-local-pro": "npm run build && concurrently --names \"MOCKER,DEPLOY\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run deploy\"",
+    "start-docs": "npm run generate-docs && npm run docs-deploy",
     "build": "node build/build.js",
     "mocker": "node test/json-server/mocker.js",
     "deploy": "node_modules/serve/bin/serve.js -s dist",
