@@ -87,10 +87,12 @@ $> npm run docs-deploy
 - Conditional toggle route module loading
 - [Component oriented programming](https://medium.com/@dan.shapiro1210/understanding-component-based-architecture-3ff48ec0c238)
 - [State pattern](https://medium.com/@patrickackerman/the-state-pattern-with-vanilla-javascript-e40ff83e85d0)
-- SCSS Style postprocessing
+- [SCSS Style](https://sass-lang.com/)
+- [postCSS](http://postcss.org/)
 - [Storybook component modeling and testing tool](https://storybook.js.org/)
 - [JSDoc3 documentation generator](http://usejsdoc.org/)
 - [DocDash JSDoc template](https://github.com/clenemt/docdash)
+
 
 # Currently Scaffolding
 - Three modules: App, Auth, Home, HeavyModule
@@ -113,6 +115,10 @@ $> npm run docs-deploy
 - Register a new user and finish session
 - Login with an existing user and finish session
 - Login with an fake user and get an error
+
+# Styles
+- SCSS styles extension
+- postCSS with addons: autoprefixer, stylelint, postcss-flexbugs-fixes, postcss-reporter
 
 # StoryBook
 - [Readme Addon](https://github.com/tuchk4/storybook-readme) Allow show markdown like documentarion close to component
