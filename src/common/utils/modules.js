@@ -7,6 +7,7 @@ import store from '../../modules/app/logic/store';
 import DisabledModule from '../components/DisabledModule';
 
 /**
+ * @public
  * @function toggle
  * @description Utitlity to enrute if toggle is true
  * @param {String} toogleName

@@ -1,5 +1,5 @@
 /**
- * @module Common/Utils/paths
+ * @module Common/Utils/api/paths
  */
 
 /**

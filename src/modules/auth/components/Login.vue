@@ -5,9 +5,8 @@
           @submit="processForm"
           method="post">
       <div class="error"
-           v-show="error.code">
-        <span class="error-code">{{ error.code }} </span>
-        <span class="error-text">{{ error.text }} </span>
+           v-show="error">
+        <span class="error-text">{{ error }} </span>
       </div>
       <label for="user">{{ literals.user }}</label>
       <Input type="text"

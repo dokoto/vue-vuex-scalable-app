@@ -39,6 +39,15 @@ $> npm test
 # show all options
 $> npm run
 
+# Run mocker and webpack-dev-server
+$> npm start-local-dev
+
+# Build release and run mocker and deploy release
+$> npm start-local-pro
+
+# Build docs and deploy them
+$> npmstart-docs
+
 # run mocker restfull server
 $> npm run mocker
 

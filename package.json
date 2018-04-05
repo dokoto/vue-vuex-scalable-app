@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "start-local-dev": "nconcurrently --names \"MOCKER,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run start\"",
+    "start-local-dev": "concurrently --names \"MOCKER,WATCHER\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run start\"",
     "start-local-pro": "npm run build && concurrently --names \"MOCKER,DEPLOY\" -c \"bgBlue.bold,bgMagenta.bold,bgBlue.bold\" \"npm run mocker\" \"npm run deploy\"",
     "start-docs": "npm run generate-docs && npm run docs-deploy",
     "build": "node build/build.js",
@@ -23,7 +23,7 @@
     "test": "npm run unit-verbose && npm run e2e-cli-local",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "storybook": "start-storybook -p 9001 -c test/storybook",
-    "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json",
+    "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json --access all",
     "docs-deploy": "node_modules/serve/bin/serve.js -s docs"
   },
   "dependencies": {

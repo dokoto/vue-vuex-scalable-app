@@ -3,6 +3,7 @@
  */
 
 /**
+ * @public
  * @function getDeep
  * @description Utitlity to safe object access
  * @param {Object} obj Data structure where extract he value

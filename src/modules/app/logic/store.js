@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import * as types from './types';
-import { getToogles } from '../../../common/utils/services';
+import { getToogles } from '../../../common/utils/api';
 import auth from '../../auth/logic/store';
 import home from '../../home/logic/store';
 
@@ -15,6 +15,7 @@ const state = {};
 
 const actions = {
   /**
+   * @public
    * @function getToogles
    * @description Fetch modules toogles to know what modules must be enable
    * @param {Object} commit default action param (bind param)
@@ -24,7 +25,7 @@ const actions = {
    */
   async getToogles({ commit }) {
     const toggles = await getToogles();
-    commit(types.RECEIVE_TOGGLES, toggles);
+    commit(types.RECEIVE_TOGGLES, toggles.data);
   }
 };
 

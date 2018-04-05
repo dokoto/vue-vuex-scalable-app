@@ -11,16 +11,22 @@ function view(obj, fields) {
   }, {});
 }
 
-function parseNewUser(masterToken, body) {
+function parseNewUser(masterToken, headers, body) {
   if (!body) {
     return {
       code: 404,
+      data: { message: 'Recurso no encontrado' }
     };
   }
 
-  if (body.access_token !== masterToken) {
+  if (headers['x-access-token'] !== masterToken) {
     return {
       code: 401,
+      data: {
+        message: `El accessToken "${
+          headers['x-access-token']
+        }" no es correcto or no existe`
+      }
     };
   }
 
@@ -35,27 +41,33 @@ function parseNewUser(masterToken, body) {
   if (exist) {
     return {
       code: 200,
-      user
+      data: user
     };
   }
 
   users.push(user);
   return {
     code: 201,
-    user: view(user, ['access_token', 'user', 'email'])
+    data: view(user, ['access_token', 'user', 'email'])
   };
 }
 
-function parseUser(masterToken, body) {
+function parseUser(masterToken, headers, body) {
   if (!body) {
     return {
-      code: 404
+      code: 404,
+      data: { message: 'Recurso no encontrado' }
     };
   }
 
-  if (body.access_token !== masterToken) {
+  if (headers['x-access-token'] !== masterToken) {
     return {
-      code: 401
+      code: 401,
+      data: {
+        message: `El accessToken "${
+          headers['x-access-token']
+        }" no es correcto or no existe`
+      }
     };
   }
 
@@ -63,7 +75,7 @@ function parseUser(masterToken, body) {
   if (!user || user.password !== body.password) {
     console.log('User no found', body.user);
     return {
-      code: 401
+      code: 404
     };
   }
 
@@ -71,23 +83,19 @@ function parseUser(masterToken, body) {
   user.access_token = randtoken.generate(16);
   return {
     code: 200,
-    user: view(user, ['access_token', 'user', 'email'])
+    data: view(user, ['access_token', 'user', 'email'])
   };
 }
 
 module.exports = function addRoutes(masterToken, server) {
-  server.get('/login', (req, res) => {
-    res.status(200).jsonp(req.query);
-  });
-
   server.post('/login', (req, res) => {
-    const response = parseUser(masterToken, req.body);
-    res.status(response.code).jsonp(response.user);
+    const response = parseUser(masterToken, req.headers, req.body);
+    res.status(response.code).jsonp(response.data);
   });
 
   server.post('/login/signup', (req, res) => {
-    const response = parseNewUser(masterToken, req.body);
-    res.status(response.code).jsonp(response.user);
+    const response = parseNewUser(masterToken, req.headers, req.body);
+    res.status(response.code).jsonp(response.data);
   });
 
   server.put('/login', (req, res) => {

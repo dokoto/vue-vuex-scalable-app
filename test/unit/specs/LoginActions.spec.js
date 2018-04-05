@@ -1,6 +1,6 @@
 import store from '@/modules/auth/logic/store';
 
-jest.mock('@/common/utils/services');
+jest.mock('@/common/utils/api');
 
 describe('doLogin action should return "home" path name when do login o register with a real user', () => {
   it('Do login', () => {
@@ -12,9 +12,9 @@ describe('doLogin action should return "home" path name when do login o register
       username: 'manuel',
       password: '123'
     };
-    store.actions
-      .doLogin(context, input)
-      .then(resp => expect(resp).toEqual({ name: 'home' }));
+    return expect(store.actions.doLogin(context, input)).resolves.toEqual({
+      name: 'home'
+    });
   });
 
   it('Register', () => {
@@ -27,9 +27,9 @@ describe('doLogin action should return "home" path name when do login o register
       password: '123',
       email: 'manuel@gg.com'
     };
-    store.actions
-      .registrer(context, input)
-      .then(resp => expect(resp).toEqual({ name: 'home' }));
+    return expect(store.actions.registrer(context, input)).resolves.toEqual({
+      name: 'home'
+    });
   });
 });
 
@@ -43,13 +43,8 @@ describe('doLogin action should return erro 401 path name when do login o regist
       username: 'manuel-bad',
       password: '123-bad'
     };
-    store.actions.doLogin(context, input).then(resp =>
-      expect(resp).toEqual({
-        error: {
-          text: 'Unauthorized',
-          code: 401
-        }
-      })
-    );
+    return expect(store.actions.doLogin(context, input)).rejects.toEqual({
+      error: 'Unauthorized-dsfds'
+    });
   });
 });

@@ -1,18 +1,20 @@
-import * as env from '../../../../config/test.env';
+import { STATUS } from '../constants';
 
 const users = {
   manuel: {
-    access_token: env.VUE_APP_MASTER_TOKEN.replace(/"/g, ''),
-    user: 'manuel',
-    email: 'manuel@gg.com',
-    password: '123'
+    status: STATUS.SUCCESS,
+    data: {
+      user: 'manuel',
+      email: 'manuel@gg.com',
+      password: '123'
+    }
   }
 };
 
 const Unauthorized = {
-  error: {
-    text: 'Unauthorized',
-    code: 401
+  status: STATUS.FAIL,
+  data: {
+    message: 'Unauthorized'
   }
 };
 
