@@ -47,6 +47,23 @@ export const STATUS = {
 /**
  * @constant
  * @description HTTP Status codes supported
+ * @property {Object} POST Supported HTTP POST Codes
+ * @property {String} POST.ERROR Internal Server Error. The request was not completed.
+ * The server met an unexpected condition.
+ * @property {String} POST.NO_AUTH Unauthorized. The requested page needs a username and
+ * a password or access token.
+ * @property {String} POST.BAD_REQUEST Bad Request. The server did not understand the request
+ * because needs mandatory fields
+ * @property {String} POST.CREATED Created. The request is complete, and a new resource is created.
+ * @property {String} POST.RESOURCE_EXIST Conflict. The request could not be completed because
+ * of a conflict. Commonly the resource id already exist.
+ * @property {Object} PUT Supported HTTP PUT Codes
+ * @property {String} PUT.ERROR Internal Server Error. The request was not completed.
+ * The server met an unexpected condition.
+ * @property {String} PUT.NO_AUTH Unauthorized. The requested page needs a username and
+ * a password or access token.
+ * @property {String} PUT.BAD_REQUEST Bad Request. The server did not understand the request
+ * because needs mandatory fields
  */
 export const CODES = {
   POST: {
