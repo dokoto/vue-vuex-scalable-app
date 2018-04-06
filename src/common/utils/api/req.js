@@ -57,13 +57,7 @@ class Post extends ReqBase {
    * @param {object} response Request object
    */
   static response(response) {
-    const {
-      CREATED,
-      ERROR,
-      NO_AUTH,
-      BAD_REQUEST,
-      RESOURCE_EXIST
-    } = CODES.POST;
+    const { CREATED, ERROR, NO_AUTH, BAD_REQUEST, RESOURCE_EXIST } = CODES.POST;
 
     if ([CREATED].includes(response.status)) {
       return super.success(response);
@@ -147,6 +141,64 @@ class Put extends ReqBase {
 }
 
 /**
+ * @class Delete
+ * @extends ReqBase
+ * @classdesc Request Delete Method
+ * @example
+ * // Not use new()
+ * Delete.fetch(paths.login, id);
+ */
+class Delete extends ReqBase {
+  /**
+   * @public
+   * @description Fetch a delete request
+   * @param {String} path Endpoint url
+   * @returns {module:Common/Utils/Api/Req~jsend} jsend object type
+   * @example
+   * Delete.fetch(`${paths.login}/${id}`);
+   */
+  static fetch(path) {
+    return fetch(path, this.options())
+      .then(this.response)
+      .catch(err =>
+        Promise.reject({
+          status: STATUS.ERROR,
+          message: err.message
+        })
+      );
+  }
+
+  /**
+   * @private
+   * @description Build fetch options for delete method
+   * @returns {object} Options fetch object
+   */
+  static options() {
+    return {
+      method: METHODS.DELETE,
+      headers: HEADERS.JSON_TYPE
+    };
+  }
+
+  /**
+   * @private
+   * @description Handle delete server response
+   * @param {object} response Request object
+   */
+  static response(response) {
+    const { SUCCESS, NOT_FOUND, NO_AUTH, ERROR } = CODES.DELETE;
+    if ([SUCCESS].includes(response.status)) {
+      return super.success(response);
+    } else if (response.status === ERROR) {
+      return super.error(response);
+    } else if ([NOT_FOUND, NO_AUTH].includes(response.status)) {
+      return super.fail(response);
+    }
+    return super.error(response);
+  }
+}
+
+/**
  * @class Get
  * @extends ReqBase
  * @classdesc Request Get Method
@@ -205,4 +257,4 @@ class Get extends ReqBase {
   }
 }
 
-export { Post, Put, Get };
+export { Post, Put, Get, Delete };

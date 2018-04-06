@@ -1,4 +1,4 @@
-import { Get, Put, Post } from '@/common/utils/api/req';
+import { Get, Put, Post, Delete } from '@/common/utils/api/req';
 import * as paths from '@/common/utils/api/paths';
 import { STATUS, CODES } from '@/common/utils/api/constants';
 
@@ -23,7 +23,8 @@ const buildFetchSpyReject = (status, body) => {
 describe('Testing POST method of "Req" Class API Caller', () => {
   it('Should capture reject and return ERROR with "message" attribute when fetch(POST) fails', async () => {
     const response = {
-      message: 'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
+      message:
+        'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
     };
     const request = {
       username: 'manuel',
@@ -31,17 +32,20 @@ describe('Testing POST method of "Req" Class API Caller', () => {
       email: 'manuel@cool.email.com'
     };
     buildFetchSpyReject(CODES.POST.ERROR, response);
-    await expect(Post.fetch(paths.toggles)).rejects.toHaveProperty(
+    await expect(Post.fetch(paths.toggles, request)).rejects.toHaveProperty(
       'status',
       STATUS.ERROR
     );
     buildFetchSpyReject(CODES.POST.ERROR, response);
-    await expect(Post.fetch(paths.toggles, request)).rejects.toHaveProperty('message');
+    await expect(Post.fetch(paths.toggles, request)).rejects.toHaveProperty(
+      'message'
+    );
   });
 
   it('Should capture resolve and return ERROR with "message" attribute for a HTTP 500(ERROR CHUNGO) response', async () => {
     const response = {
-      statusText: 'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
+      statusText:
+        'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
     };
     const request = {
       username: 'manuel',
@@ -49,12 +53,14 @@ describe('Testing POST method of "Req" Class API Caller', () => {
       email: 'manuel@cool.email.com'
     };
     buildFetchSpyResolve(CODES.POST.ERROR, response);
-    await expect(Post.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.ERROR
     );
     buildFetchSpyResolve(CODES.POST.ERROR, response);
-    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty('message');
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'message'
+    );
   });
 
   it('Should capture resolve and return FAIL with "data" attribute for a HTTP 401(NO AUTH) response', async () => {
@@ -68,12 +74,14 @@ describe('Testing POST method of "Req" Class API Caller', () => {
     };
 
     buildFetchSpyResolve(CODES.POST.NO_AUTH, response);
-    await expect(Post.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.FAIL
     );
     buildFetchSpyResolve(CODES.POST.NO_AUTH, response);
-    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return FAIL with "data" attribute for a HTTP 400(BAD REQUEST) response', async () => {
@@ -85,12 +93,14 @@ describe('Testing POST method of "Req" Class API Caller', () => {
       email: 'manuel@cool.email.com'
     };
     buildFetchSpyResolve(CODES.POST.BAD_REQUEST, response);
-    await expect(Post.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.FAIL
     );
     buildFetchSpyResolve(CODES.POST.BAD_REQUEST, response);
-    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return SUCCESS with "data" attribute for a HTTP 201(CREATED) response', async () => {
@@ -105,12 +115,14 @@ describe('Testing POST method of "Req" Class API Caller', () => {
       email: 'manuel@cool.email.com'
     };
     buildFetchSpyResolve(CODES.POST.CREATED, response);
-    await expect(Post.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.SUCCESS
     );
     buildFetchSpyResolve(CODES.POST.CREATED, response);
-    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Post.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   afterEach(() => {
@@ -118,11 +130,11 @@ describe('Testing POST method of "Req" Class API Caller', () => {
   });
 });
 
-
 describe('Testing PUT method of "Req" Class API Caller', () => {
   it('Should capture reject and return ERROR with "message" attribute when fetch(PUT) fails', async () => {
     const response = {
-      message: 'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
+      message:
+        'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
     };
     const request = {
       home: false,
@@ -130,17 +142,20 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyReject(CODES.PUT.ERROR, { response });
-    await expect(Put.fetch(paths.toggles)).rejects.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).rejects.toHaveProperty(
       'status',
       STATUS.ERROR
     );
     buildFetchSpyReject(CODES.PUT.ERROR, { response });
-    await expect(Put.fetch(paths.toggles, request)).rejects.toHaveProperty('message');
+    await expect(Put.fetch(paths.toggles, request)).rejects.toHaveProperty(
+      'message'
+    );
   });
 
   it('Should capture resolve and return ERROR with "message" attribute for a HTTP 500(ERROR CHUNGO) response', async () => {
     const response = {
-      statusText: 'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
+      statusText:
+        'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
     };
     const request = {
       home: false,
@@ -148,12 +163,14 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyResolve(CODES.PUT.ERROR, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.ERROR
     );
     buildFetchSpyResolve(CODES.PUT.ERROR, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('message');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'message'
+    );
   });
 
   it('Should capture resolve and return FAIL with "data" attribute for a HTTP 401(NO AUTH) response', async () => {
@@ -166,12 +183,14 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyResolve(CODES.PUT.NO_AUTH, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.FAIL
     );
     buildFetchSpyResolve(CODES.PUT.NO_AUTH, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return FAIL with "data" attribute for a HTTP 404(NOT FOUND) response', async () => {
@@ -183,12 +202,14 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       email: 'jajajaja@IgoingtToDestroyYou.com'
     };
     buildFetchSpyResolve(CODES.PUT.NOT_FOUND, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.FAIL
     );
     buildFetchSpyResolve(CODES.PUT.NOT_FOUND, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return FAIL with "data" attribute for a HTTP 400(BAD REQUEST) response', async () => {
@@ -201,12 +222,14 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyResolve(CODES.PUT.BAD_REQUEST, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.FAIL
     );
     buildFetchSpyResolve(CODES.PUT.BAD_REQUEST, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return SUCCESS with "data" attribute for a HTTP 204(NO CONTENT) response', async () => {
@@ -217,12 +240,14 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyResolve(CODES.PUT.NO_CONTENT, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.SUCCESS
     );
     buildFetchSpyResolve(CODES.PUT.NO_CONTENT, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
   });
 
   it('Should capture resolve and return SUCCESS with "data" attribute for a HTTP 200(SUCCESS) response', async () => {
@@ -237,12 +262,98 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
       newModule: false
     };
     buildFetchSpyResolve(CODES.PUT.SUCCESS, response);
-    await expect(Put.fetch(paths.toggles)).resolves.toHaveProperty(
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
       'status',
       STATUS.SUCCESS
     );
     buildFetchSpyResolve(CODES.PUT.SUCCESS, response);
-    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty('data');
+    await expect(Put.fetch(paths.toggles, request)).resolves.toHaveProperty(
+      'data'
+    );
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+});
+
+describe('Testing DELETE method of "Req" Class API Caller', () => {
+  it('Should capture reject and return ERROR with "message" attribute when fetch(DELETE) fails', async () => {
+    const response = {
+      message:
+        'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
+    };
+    const email = 'manuel@cool.email.com';
+    buildFetchSpyReject(CODES.DELETE.ERROR, { response });
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).rejects.toHaveProperty('status', STATUS.ERROR);
+    buildFetchSpyReject(CODES.DELETE.ERROR, { response });
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).rejects.toHaveProperty('message');
+  });
+
+  it('Should capture resolve and return ERROR with "message" attribute for a HTTP 500(ERROR CHUNGO) response', async () => {
+    const response = {
+      statusText:
+        'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
+    };
+    const email = 'manuel@cool.email.com';
+    buildFetchSpyResolve(CODES.DELETE.ERROR, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('status', STATUS.ERROR);
+    buildFetchSpyResolve(CODES.DELETE.ERROR, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('message');
+  });
+
+  it('Should capture resolve and return FAIL with "data" attribute for a HTTP 401(NO AUTH) response', async () => {
+    const response = {
+      message: 'Token accesss unauthorized'
+    };
+    const email = 'manuel@cool.email.com';
+    buildFetchSpyResolve(CODES.DELETE.NO_AUTH, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('status', STATUS.FAIL);
+    buildFetchSpyResolve(CODES.DELETE.NO_AUTH, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('data');
+  });
+
+  it('Should capture resolve and return FAIL with "data" attribute for a HTTP 404(NOT FOUND) response', async () => {
+    const response = {
+      email: 'email "pericoElDeLosPalotes@fake.email.com" not found'
+    };
+    const email = 'manuel@cool.email.com';
+    buildFetchSpyResolve(CODES.DELETE.NOT_FOUND, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('status', STATUS.FAIL);
+    buildFetchSpyResolve(CODES.DELETE.NOT_FOUND, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('data');
+  });
+
+  it('Should capture resolve and return SUCCESS with "data" attribute for a HTTP 200(SUCCESS) response', async () => {
+    const email = 'manuel@cool.email.com';
+    const response = {
+      username: 'manuel',
+      email
+    };
+    buildFetchSpyResolve(CODES.DELETE.SUCCESS, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('status', STATUS.SUCCESS);
+    buildFetchSpyResolve(CODES.DELETE.SUCCESS, response);
+    await expect(
+      Delete.fetch(`${paths.users}}/${email}`)
+    ).resolves.toHaveProperty('data');
   });
 
   afterEach(() => {
@@ -253,7 +364,8 @@ describe('Testing PUT method of "Req" Class API Caller', () => {
 describe('Testing GET method of "Req" Class API Caller', () => {
   it('Should capture reject and return ERROR with "message" attribute when fetch(GET) fails', async () => {
     const response = {
-      message: 'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
+      message:
+        'SyntaxError: Unexpected end of JSON input SyntaxError: Unexpected end of JSON input at JSON.parse () at XMLHttpRequest.onLoad'
     };
     buildFetchSpyReject(CODES.GET.ERROR, response);
     await expect(Get.fetch(paths.toggles)).rejects.toHaveProperty(
@@ -266,7 +378,8 @@ describe('Testing GET method of "Req" Class API Caller', () => {
 
   it('Should capture resolve and return ERROR with "message" attribute for a HTTP 500(ERROR CHUNGO) response', async () => {
     const response = {
-      statusText: 'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
+      statusText:
+        'PHP Parse error: syntax error, unexpected "{" in index.php on line 20'
     };
     buildFetchSpyResolve(CODES.GET.ERROR, response);
     await expect(Get.fetch(paths.toggles)).resolves.toHaveProperty(

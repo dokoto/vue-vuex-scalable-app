@@ -3,7 +3,6 @@
  */
 
 import * as paths from './paths';
-// import * as request from './request';
 import { Post, Get } from './req';
 
 /**
