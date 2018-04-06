@@ -31,6 +31,10 @@ describe('doLogin action should return "home" path name when do login o register
       name: 'home'
     });
   });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 });
 
 describe('doLogin action should return erro 401 path name when do login o register with a fake user', () => {
@@ -44,7 +48,11 @@ describe('doLogin action should return erro 401 path name when do login o regist
       password: '123-bad'
     };
     return expect(store.actions.doLogin(context, input)).rejects.toEqual({
-      error: 'Unauthorized-dsfds'
+      error: 'Unauthorized'
     });
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 });

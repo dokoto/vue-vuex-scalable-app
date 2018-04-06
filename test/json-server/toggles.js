@@ -26,5 +26,9 @@ module.exports = function addRoutes(masterToken, server) {
     res.status(response.code).jsonp(response.data);
   });
 
+  server.get('/toggles/e500', (req, res) => {
+    res.status(500).jsonp(null);
+  });
+
   return server;
 };

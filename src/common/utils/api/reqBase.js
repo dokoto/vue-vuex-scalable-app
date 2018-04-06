@@ -25,8 +25,14 @@ class ReqBase {
   static error(response) {
     return response
       .json()
-      .then(data => ({ status: STATUS.ERROR, message: data.statusText }))
-      .catch(err => ({ status: STATUS.ERROR, message: err.message }));
+      .then(data => {
+        debugger;
+        return { status: STATUS.ERROR, message: data.statusText };
+      })
+      .catch(err => {
+        debugger;
+        return { status: STATUS.ERROR, message: err.message };
+      });
   }
 
   /**

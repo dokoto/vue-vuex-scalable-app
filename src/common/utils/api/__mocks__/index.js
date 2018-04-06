@@ -19,10 +19,11 @@ const Unauthorized = {
 };
 
 export function doLogin(username, password) {
+  debugger;
   return new Promise(resolve => {
     process.nextTick(
       () =>
-        (users[username] && users[username].password === password
+        (users[username] && users[username].data.password === password
           ? resolve(users[username])
           : resolve(Unauthorized))
     );
@@ -33,7 +34,7 @@ export function signUp(username, email, password) {
   return new Promise(resolve => {
     process.nextTick(
       () =>
-        (users[username] && users[username].password === password
+        (users[username] && users[username].data.password === password
           ? resolve(users[username])
           : resolve(Unauthorized))
     );

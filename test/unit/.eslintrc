@@ -1,7 +1,10 @@
 {
-  "env": { 
+  "env": {
     "jest": true
   },
-  "globals": { 
+  "globals": {
+  },
+  "rules":{
+    "arrow-body-style": 0
   }
 }

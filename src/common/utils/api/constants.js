@@ -25,20 +25,19 @@ export const STATUS = {
 
 export const CODES = {
   POST: {
-    SUCCESS: 200,
-    CREATED: 201,
     ERROR: 500,
     NO_AUTH: 401,
-    RESOURCE_EXIST: 409,
-    NO_ALLOWED: 405
+    BAD_REQUEST: 400,
+    CREATED: 201,
+    RESOURCE_EXIST: 409
   },
   PUT: {
-    ERROR: 500,
     SUCCESS: 200,
-    NO_CONTENT: 204,
-    NOT_FOUND: 404,
+    ERROR: 500,
     NO_AUTH: 401,
-    NO_ALLOWED: 405
+    BAD_REQUEST: 400,
+    NOT_FOUND: 404,
+    NO_CONTENT: 204
   },
   GET: {
     SUCCESS: 200,

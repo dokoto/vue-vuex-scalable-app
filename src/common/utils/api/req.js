@@ -27,14 +27,14 @@ class Post extends ReqBase {
    * Post.fetch(paths.login, { user, password });
    */
   static fetch(path, body = {}) {
-    try {
-      return fetch(path, this.options(body)).then(this.response);
-    } catch (err) {
-      return {
-        status: STATUS.ERROR,
-        message: err.message
-      };
-    }
+    return fetch(path, this.options(body))
+      .then(this.response)
+      .catch(err =>
+        Promise.reject({
+          status: STATUS.ERROR,
+          message: err.message
+        })
+      );
   }
 
   /**
@@ -58,20 +58,19 @@ class Post extends ReqBase {
    */
   static response(response) {
     const {
-      SUCCESS,
       CREATED,
       ERROR,
       NO_AUTH,
-      RESOURCE_EXIST,
-      NO_ALLOWED
+      BAD_REQUEST,
+      RESOURCE_EXIST
     } = CODES.POST;
 
-    if ([SUCCESS, CREATED].includes(response.status)) {
+    if ([CREATED].includes(response.status)) {
       return super.success(response);
     } else if (response.status === ERROR) {
       return super.error(response);
     } else if (
-      [NO_AUTH, RESOURCE_EXIST, NO_ALLOWED].includes(response.status)
+      [NO_AUTH, RESOURCE_EXIST, BAD_REQUEST].includes(response.status)
     ) {
       return super.fail(response);
     }
@@ -97,15 +96,15 @@ class Put extends ReqBase {
    * @example
    * Put.fetch(paths.login, data);
    */
-  static fecth(path, body = {}) {
-    try {
-      return fetch(path, this.options(body)).then(this.response);
-    } catch (err) {
-      return {
-        status: STATUS.ERROR,
-        message: err.message
-      };
-    }
+  static fetch(path, body = {}) {
+    return fetch(path, this.options(body))
+      .then(this.response)
+      .catch(err =>
+        Promise.reject({
+          status: STATUS.ERROR,
+          message: err.message
+        })
+      );
   }
 
   /**
@@ -133,14 +132,14 @@ class Put extends ReqBase {
       NO_CONTENT,
       NOT_FOUND,
       NO_AUTH,
-      NO_ALLOWED,
+      BAD_REQUEST,
       ERROR
     } = CODES.PUT;
     if ([SUCCESS, NO_CONTENT].includes(response.status)) {
       return super.success(response);
     } else if (response.status === ERROR) {
       return super.error(response);
-    } else if ([NOT_FOUND, NO_AUTH, NO_ALLOWED].includes(response.status)) {
+    } else if ([NOT_FOUND, NO_AUTH, BAD_REQUEST].includes(response.status)) {
       return super.fail(response);
     }
     return super.error(response);
@@ -165,14 +164,14 @@ class Get extends ReqBase {
    * Get.fetch(paths.toggles);
    */
   static fetch(path) {
-    try {
-      return fetch(path, this.options()).then(this.response);
-    } catch (err) {
-      return {
-        status: STATUS.ERROR,
-        message: err.message
-      };
-    }
+    return fetch(path, this.options())
+      .then(this.response)
+      .catch(err =>
+        Promise.reject({
+          status: STATUS.ERROR,
+          message: err.message
+        })
+      );
   }
 
   /**
@@ -193,6 +192,7 @@ class Get extends ReqBase {
    * @param {object} response Request object
    */
   static response(response) {
+    debugger;
     const { SUCCESS, ERROR, NO_AUTH, NOT_FOUND } = CODES.GET;
     if (SUCCESS === response.status) {
       return super.success(response);
