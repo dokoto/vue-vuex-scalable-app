@@ -17,7 +17,6 @@ const LoginSelect = {
   default: 'signup',
   group: 'LOGIN-SELECT-GRP'
 };
-
 storiesOf('Auth', module)
   .addDecorator(withKnobs)
   .add(
