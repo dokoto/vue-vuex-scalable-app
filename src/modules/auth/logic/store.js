@@ -28,7 +28,6 @@ const actions = {
   doLogin({ commit }, { username, password }) {
     return new Promise(async (resolve, reject) => {
       const response = await services.doLogin(username, password);
-      debugger;
       if (response.status === STATUS.SUCCESS) {
         commit(types.LOGIN_SUCCESS, { user: response.data });
         resolve({ name: 'home' });
@@ -57,7 +56,6 @@ const actions = {
   registrer({ commit }, { username, email, password }) {
     return new Promise(async (resolve, reject) => {
       const response = await services.signUp(username, email, password);
-      debugger;
       if (response.status === STATUS.SUCCESS) {
         commit(types.LOGIN_SUCCESS, { user: response.data });
         resolve({ name: 'home' });

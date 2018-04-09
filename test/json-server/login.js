@@ -11,22 +11,40 @@ function view(obj, fields) {
   }, {});
 }
 
-function parseNewUser(masterToken, headers, body) {
-  if (!body) {
-    return {
-      code: 404,
-      data: { message: 'Recurso no encontrado' }
-    };
-  }
-
-  if (headers['x-access-token'] !== masterToken) {
+function wrongToken(masterToken, headers) {
+  if (
+    !headers.authorization &&
+    headers.authorization.split[0].toLocaleLowerCase() === 'bearer' &&
+    headers.authorization.split[1] !== masterToken
+  ) {
     return {
       code: 401,
       data: {
         message: `El accessToken "${
-          headers['x-access-token']
+          headers.authorization
         }" no es correcto or no existe`
       }
+    };
+  }
+
+  return null;
+}
+
+function parseNewUser(masterToken, headers, body) {
+  const response = wrongToken(masterToken, headers);
+  if (response) return response;
+
+  if (!body) {
+    return {
+      code: 400,
+      data: { message: 'Se esperaban un payload...' }
+    };
+  }
+
+  if (!body.user || !body.password || !body.email) {
+    return {
+      code: 400,
+      data: { message: 'Faltan datos obligatorios' }
     };
   }
 
@@ -40,8 +58,10 @@ function parseNewUser(masterToken, headers, body) {
   const exist = users.find(item => item.user === user.user);
   if (exist) {
     return {
-      code: 200,
-      data: user
+      code: 409,
+      data: {
+        message: 'Ya existe un usuario con ese nick'
+      }
     };
   }
 
@@ -53,21 +73,13 @@ function parseNewUser(masterToken, headers, body) {
 }
 
 function parseUser(masterToken, headers, body) {
+  const response = wrongToken(masterToken, headers);
+  if (response) return response;
+
   if (!body) {
     return {
-      code: 404,
-      data: { message: 'Recurso no encontrado' }
-    };
-  }
-
-  if (headers['x-access-token'] !== masterToken) {
-    return {
-      code: 401,
-      data: {
-        message: `El accessToken "${
-          headers['x-access-token']
-        }" no es correcto or no existe`
-      }
+      code: 400,
+      data: { message: 'Se esperaban un payload...' }
     };
   }
 
@@ -75,7 +87,8 @@ function parseUser(masterToken, headers, body) {
   if (!user || user.password !== body.password) {
     console.log('User no found', body.user);
     return {
-      code: 404
+      code: 401,
+      data: { message: 'Usuario no autorizado' }
     };
   }
 

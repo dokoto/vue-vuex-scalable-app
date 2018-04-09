@@ -9,7 +9,7 @@
  * - Ponemos un break-point y "pa lante"
  */
 const user = {
-  name: 'mogambo',
+  name: `mogambo-${Date.now()}`,
   email: 'mogambo@cool.com',
   password: '123456'
 };
@@ -71,8 +71,71 @@ describe('Login with an existing user and finish session', () => {
   });
 });
 
-describe('Login with an fake user and get an error', () => {
-  it('We aready on Login page', () => {
+
+describe('Try to register without data', () => {
+  it('Successfully load login page', () => {
+    cy.visit('/');
+    cy.get('.signup').should('contain', 'Registrarse');
+  });
+
+  it('Go to register and submit without data', () => {
+    cy.get('.signup').click();
+
+    cy.get('.signup').should('contain', 'Autenticarse');
+    cy.get('input[name=username]').type(user.name);
+    cy.get('input[name=password]').type(user.password);
+    cy.get('form').submit();
+  });
+
+  it('Check get an error message', () => {
+    cy.get('.error-text').should('be.visible');
+  });
+});
+
+describe('Try to register without email mandatory field', () => {
+  it('Successfully load login page', () => {
+    cy.visit('/');
+    cy.get('.signup').should('contain', 'Registrarse');
+  });
+
+  it('Go to register and submit without data', () => {
+    cy.get('.signup').click();
+
+    cy.get('.signup').should('contain', 'Autenticarse');
+    cy.get('input[name=username]').type(user.name);
+    cy.get('input[name=password]').type(user.password);
+    cy.get('form').submit();
+  });
+
+  it('Check get an error message', () => {
+    cy.get('.error-text').should('be.visible');
+  });
+});
+
+describe('Try to register with an existing user', () => {
+  it('Successfully load login page', () => {
+    cy.visit('/');
+    cy.get('.signup').should('contain', 'Registrarse');
+  });
+
+  it('Go to register and submit without data', () => {
+    cy.get('.signup').click();
+
+    cy.get('.signup').should('contain', 'Autenticarse');
+    cy.get('input[name=username]').type(user.name);
+    cy.get('input[name=email]').type(user.email);
+    cy.get('input[name=password]').type(user.password);
+    cy.get('form').submit();
+  });
+
+  it('Check get an error message', () => {
+    cy.get('.error-text').should('be.visible');
+  });
+});
+
+describe('Login with an wrong user and get an error', () => {
+  it('Successfully load login page', () => {
+    cy.visit('/');
     cy.get('.signup').should('contain', 'Registrarse');
   });
 
@@ -82,7 +145,24 @@ describe('Login with an fake user and get an error', () => {
     cy.get('form').submit();
   });
 
-  it('Check get an unAuthorized message', () => {
-    cy.get('.error-text').should('contain', 'Unauthorized');
+  it('Check get an error message', () => {
+    cy.get('.error-text').should('be.visible');
+  });
+});
+
+describe('Login with an wrong password', () => {
+  it('Successfully load login page', () => {
+    cy.visit('/');
+    cy.get('.signup').should('contain', 'Registrarse');
+  });
+
+  it('Failed loging a test user', () => {
+    cy.get('input[name=username]').type(`${user.name}`);
+    cy.get('input[name=password]').type(`${user.password}-bad`);
+    cy.get('form').submit();
+  });
+
+  it('Check get an error message', () => {
+    cy.get('.error-text').should('be.visible');
   });
 });

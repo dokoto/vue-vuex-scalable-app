@@ -14,20 +14,24 @@ import { HEADERS, METHODS, STATUS, CODES } from './constants';
  * @classdesc Static Request Post Method
  * @example
  * // Not use new()
- * Post.fetch(paths.login, { user, password });
+ * Post.fetch(paths.login, { body: { user, password },
+ * header: { Authorization: `Bearer ${token}`}});
  */
 class Post extends ReqBase {
   /**
    * @public
    * @description Fetch a post request
    * @param {String} path Endpoint url
-   * @param {Object} [body = {}] Payload data
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {module:Common/Utils/Api/Req~jsend} jsend object type
    * @example
-   * Post.fetch(paths.login, { user, password });
+   * Post.fetch(paths.login, { body: { user, password },
+   * header: { Authorization: `Bearer ${token}`}});
    */
-  static fetch(path, body = {}) {
-    return fetch(path, this.options(body))
+  static fetch(path, options = {}) {
+    return fetch(path, this.options(options))
       .then(this.response)
       .catch(err =>
         Promise.reject({
@@ -40,14 +44,19 @@ class Post extends ReqBase {
   /**
    * @private
    * @description Build fetch options for post method
-   * @param {Object} [body = {}] Payload data
-   * @returns {object} Options fetch object
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
+   * @returns {Object} Options fetch object
    */
-  static options(body = {}) {
+  static options(options = {}) {
+    const headers = options.headers
+      ? { ...HEADERS.JSON_TYPE, ...options.headers }
+      : HEADERS.JSON_TYPE;
     return {
       method: METHODS.POST,
-      headers: HEADERS.JSON_TYPE,
-      body: JSON.stringify(body)
+      headers,
+      body: JSON.stringify(options.body)
     };
   }
 
@@ -57,9 +66,9 @@ class Post extends ReqBase {
    * @param {object} response Request object
    */
   static response(response) {
-    const { CREATED, ERROR, NO_AUTH, BAD_REQUEST, RESOURCE_EXIST } = CODES.POST;
+    const { CREATED, SUCCESS, ERROR, NO_AUTH, BAD_REQUEST, RESOURCE_EXIST } = CODES.POST;
 
-    if ([CREATED].includes(response.status)) {
+    if ([CREATED, SUCCESS].includes(response.status)) {
       return super.success(response);
     } else if (response.status === ERROR) {
       return super.error(response);
@@ -78,20 +87,24 @@ class Post extends ReqBase {
  * @classdesc Request Put Method
  * @example
  * // Not use new()
- * Put.fetch(paths.login, { user, email });
+ * Put.fetch(paths.users, { body: { user, email },
+ * header: { Authorization: `Bearer ${token}`}});
  */
 class Put extends ReqBase {
   /**
    * @public
    * @description Fetch a put request
    * @param {String} path Endpoint url
-   * @param {Object} [body = {}] Payload data
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {module:Common/Utils/Api/Req~jsend} jsend object type
    * @example
-   * Put.fetch(paths.login, data);
+   * Put.fetch(paths.users, { body: { user, email },
+   * header: { Authorization: `Bearer ${token}`}});
    */
-  static fetch(path, body = {}) {
-    return fetch(path, this.options(body))
+  static fetch(path, options = {}) {
+    return fetch(path, this.options(options))
       .then(this.response)
       .catch(err =>
         Promise.reject({
@@ -104,14 +117,19 @@ class Put extends ReqBase {
   /**
    * @private
    * @description Build fetch options for put method
-   * @param {Object} [body = {}] Payload data
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {object} Options fetch object
    */
-  static options(body = {}) {
+  static options(options = {}) {
+    const headers = options.headers
+      ? { ...HEADERS.JSON_TYPE, ...options.headers }
+      : HEADERS.JSON_TYPE;
     return {
       method: METHODS.PUT,
-      headers: HEADERS.JSON_TYPE,
-      body: JSON.stringify(body)
+      headers,
+      body: JSON.stringify(options.body)
     };
   }
 
@@ -146,19 +164,24 @@ class Put extends ReqBase {
  * @classdesc Request Delete Method
  * @example
  * // Not use new()
- * Delete.fetch(paths.login, id);
+ * Delete.fetch(`${paths.users}/${id}`,
+ * { header: { Authorization: `Bearer ${token}`}});
  */
 class Delete extends ReqBase {
   /**
    * @public
    * @description Fetch a delete request
    * @param {String} path Endpoint url
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {module:Common/Utils/Api/Req~jsend} jsend object type
    * @example
-   * Delete.fetch(`${paths.login}/${id}`);
+   * Delete.fetch(`${paths.users}/${id}`,
+   * { header: { Authorization: `Bearer ${token}`}});
    */
-  static fetch(path) {
-    return fetch(path, this.options())
+  static fetch(path, options = {}) {
+    return fetch(path, this.options(options))
       .then(this.response)
       .catch(err =>
         Promise.reject({
@@ -171,12 +194,18 @@ class Delete extends ReqBase {
   /**
    * @private
    * @description Build fetch options for delete method
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {object} Options fetch object
    */
-  static options() {
+  static options(options = {}) {
+    const headers = options.headers
+      ? { ...HEADERS.JSON_TYPE, ...options.headers }
+      : HEADERS.JSON_TYPE;
     return {
       method: METHODS.DELETE,
-      headers: HEADERS.JSON_TYPE
+      headers
     };
   }
 
@@ -204,19 +233,24 @@ class Delete extends ReqBase {
  * @classdesc Request Get Method
  * @example
  * // Not use new()
- * Get.fetch(paths.toggles);
+ * Get.fetch(`${paths.users}/${id}`,
+ * { header: { Authorization: `Bearer ${token}`}});
  */
 class Get extends ReqBase {
   /**
    * @public
    * @description Fetch a get request
    * @param {String} path Endpoint url
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {module:Common/Utils/Api/Req~jsend} jsend object type
    * @example
-   * Get.fetch(paths.toggles);
+   * Get.fetch(`${paths.users}/${id}`,
+   * { header: { Authorization: `Bearer ${token}`}});
    */
-  static fetch(path) {
-    return fetch(path, this.options())
+  static fetch(path, options = {}) {
+    return fetch(path, this.options(options))
       .then(this.response)
       .catch(err =>
         Promise.reject({
@@ -229,12 +263,18 @@ class Get extends ReqBase {
   /**
    * @private
    * @description Build fetch options for get method
+   * @param {Object} [options = {}] Fetch options (body, headers)
+   * @param {String} [options.headers = {}] Http fetch headers
+   * @param {String} [options.body = {}] Http payload
    * @returns {object} Options fetch object
    */
-  static options() {
+  static options(options = {}) {
+    const headers = options.headers
+      ? { ...HEADERS.JSON_TYPE, ...options.headers }
+      : HEADERS.JSON_TYPE;
     return {
       method: METHODS.GET,
-      headers: HEADERS.JSON_TYPE
+      headers
     };
   }
 
@@ -244,7 +284,6 @@ class Get extends ReqBase {
    * @param {object} response Request object
    */
   static response(response) {
-    debugger;
     const { SUCCESS, ERROR, NO_AUTH, NOT_FOUND } = CODES.GET;
     if (SUCCESS === response.status) {
       return super.success(response);

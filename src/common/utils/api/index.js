@@ -7,6 +7,32 @@ import { Post, Get } from './req';
 
 /**
  * @public
+ * @function bearerAuth
+ * @description Build a toke autentication header
+ * @param {String} token
+ * @returns {Object} Authorization header
+ * @example
+ * const authAttr = bearerAuth('808ds678asoionxc8787');
+ */
+export function bearerAuth(token) {
+  return { Authorization: `Bearer ${token}` };
+}
+
+/**
+ * @public
+ * @function basicAuth
+ * @description Build a basic http header authorization
+ * @param {String} token
+ * @returns {Object} Authorization header
+ * @example
+ * const authAttr = basicAuth('manuel', 'complicatedPass');
+ */
+export function basicAuth(username, password) {
+  return { Authorization: `Basic ${btoa(`${username}:${password}`)}` };
+}
+
+/**
+ * @public
  * @function doLogin
  * @description Login user
  * @param {String} user
@@ -17,8 +43,11 @@ import { Post, Get } from './req';
  */
 export function doLogin(user, password) {
   return Post.fetch(paths.login, {
-    user,
-    password
+    body: {
+      user,
+      password
+    },
+    headers: { ...bearerAuth(process.env.VUE_APP_MASTER_TOKEN) }
   });
 }
 
@@ -35,9 +64,12 @@ export function doLogin(user, password) {
  */
 export function signUp(user, email, password) {
   return Post.fetch(paths.signup, {
-    user,
-    email,
-    password
+    body: {
+      user,
+      email,
+      password
+    },
+    headers: { ...bearerAuth(process.env.VUE_APP_MASTER_TOKEN) }
   });
 }
 
@@ -50,5 +82,7 @@ export function signUp(user, email, password) {
  * const toogles = await getToogles();
  */
 export function getToogles() {
-  return Get.fetch(paths.toggles);
+  return Get.fetch(paths.toggles, {
+    headers: { ...bearerAuth(process.env.VUE_APP_MASTER_TOKEN) }
+  });
 }

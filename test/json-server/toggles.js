@@ -2,18 +2,22 @@ const toggles = {
   home: true,
   HeavyMod: false
 };
-
-function handleTokens (masterToken, headers) {
-  if (headers['x-access-token'] !== masterToken) {
+function handleTokens(masterToken, headers) {
+  if (
+    !headers.authorization &&
+    headers.authorization.split[0].toLocaleLowerCase() === 'bearer' &&
+    headers.authorization.split[1] !== masterToken
+  ) {
     return {
       code: 401,
       data: {
         message: `El accessToken "${
-          headers['x-access-token']
+          headers.authorization
         }" no es correcto or no existe`
       }
     };
   }
+
   return {
     code: 200,
     data: toggles
@@ -22,6 +26,7 @@ function handleTokens (masterToken, headers) {
 
 module.exports = function addRoutes(masterToken, server) {
   server.get('/toggles', (req, res) => {
+    debugger;
     const response = handleTokens(masterToken, req.headers);
     res.status(response.code).jsonp(response.data);
   });
