@@ -2,8 +2,8 @@
  * @module Common/Utils/modules
  */
 
+import store from '@/modules/app/logic/store';
 import getDeep from './objects';
-import store from '../../modules/app/logic/store';
 import DisabledModule from '../components/DisabledModule';
 
 /**

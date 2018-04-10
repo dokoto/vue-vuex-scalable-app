@@ -24,7 +24,7 @@ export default {
 
 
 <style lang="scss">
-@import '../../common/styles/base.scss';
+@import 'src/common/styles/base.scss';
 
 body,
 html {

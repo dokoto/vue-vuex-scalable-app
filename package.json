@@ -87,7 +87,7 @@
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
     "postcss-flexbugs-fixes": "^3.3.0",
-    "postcss-import": "^11.0.0",
+    "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.2",
     "postcss-reporter": "^5.0.0",
     "postcss-url": "^7.2.1",

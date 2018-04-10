@@ -34,8 +34,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import Input from '../../../common/components/Input';
-import Card from '../../../common/components/Card';
+import Card from '@/common/components/Card';
+import Input from '@/common/components/Input';
 
 export default {
   components: { Input, Card },
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../common/styles/base.scss';
+@import 'src/common/styles/base.scss';
 .login {
   margin-top: 20%;
 }

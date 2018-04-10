@@ -4,8 +4,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { getToogles } from '@/common/utils/api';
 import * as types from './types';
-import { getToogles } from '../../../common/utils/api';
 import auth from '../../auth/logic/store';
 import home from '../../home/logic/store';
 

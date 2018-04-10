@@ -1,5 +1,5 @@
-import enData from '../../assets/i18n/en';
-import esData from '../../assets/i18n/es';
+import enData from '@/assets/i18n/en';
+import esData from '@/assets/i18n/es';
 
 const langs = {
   en: enData,

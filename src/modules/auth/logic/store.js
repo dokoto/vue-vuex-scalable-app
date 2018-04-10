@@ -1,9 +1,9 @@
 /**
  * @module Auth/Auth/Store
  */
-import * as services from '../../../common/utils/api';
-import { STATUS } from '../../../common/utils/api/constants';
-import * as constants from '../../../common/constants';
+import * as services from '@/common/utils/api';
+import { STATUS } from '@/common/utils/api/constants';
+import * as constants from '@/common/constants';
 import * as types from './types';
 
 const state = {

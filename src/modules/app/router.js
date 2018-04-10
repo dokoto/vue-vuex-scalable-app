@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import toggle from '@/common/utils/modules';
 import Auth from '../auth/view';
-import toggle from '../../common/utils/modules';
 
 const Home = () => import(/* webpackChunkName: 'Home' */ '../home/view.vue');
 const HeavyMod = () =>
