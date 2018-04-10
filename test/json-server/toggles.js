@@ -1,6 +1,10 @@
 const toggles = {
   home: true,
-  HeavyMod: false
+  'fakeComplexModA:fakeSubModA': false,
+  'fakeComplexModA:fakeSubModB': true,
+  fakeComplexModB: true,
+  'fakeComplexModB:fakeSubModA': true,
+  'fakeComplexModB:fakeSubModB': false
 };
 function handleTokens(masterToken, headers) {
   if (

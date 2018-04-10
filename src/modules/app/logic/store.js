@@ -7,11 +7,14 @@ import Vuex from 'vuex';
 import { getToogles } from '@/common/utils/api';
 import * as types from './types';
 import auth from '../../auth/logic/store';
-import home from '../../home/logic/store';
+import fakeComplexModA from '../../fakeComplexModA';
+import fakeComplexModB from '../../fakeComplexModB/logic/store';
 
 Vue.use(Vuex);
 
-const state = {};
+const state = {
+  toggles: {}
+};
 
 const actions = {
   /**
@@ -37,16 +40,17 @@ const mutations = {
 
 const app = {
   namespaced: true,
+  state,
   mutations,
   actions
 };
 
 const store = new Vuex.Store({
-  state,
   modules: {
     app,
-    home,
-    auth
+    auth,
+    fakeComplexModA,
+    fakeComplexModB
   },
   strict: process.env.ENV !== 'production'
 });

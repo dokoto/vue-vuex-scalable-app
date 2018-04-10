@@ -5,12 +5,16 @@
     <a href="#"
        @click="logOut"
        class="logout">{{ literals.logout }}</a>
+    <Menu />
   </section>
 </template>
 
 
 <script>
+import Menu from './components/menu';
+
 export default {
+  components: { Menu },
   methods: {
     logOut() {
       this.$store
@@ -40,7 +44,7 @@ export default {
   background-color: $colorGrey4;
   .title {
     color: #2b2be2;
-    font-size: 3em;
+    font-size: 2em;
   }
   .logout {
     color: red;
