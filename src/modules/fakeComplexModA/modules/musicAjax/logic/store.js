@@ -1,9 +1,4 @@
-import {
-  sortMusic,
-  filterMusic,
-  saveMusic,
-  getTracks
-} from '@/common/utils/api';
+import { sortMusic, filterMusic, saveMusic, getTracks } from '@/common/utils/api';
 // import { STATUS } from '@/common/utils/api/constants';
 // import * as constants from '@/common/constants';
 import * as types from './types';
@@ -22,33 +17,38 @@ const actions = {
     commit(types.MUSIC_RECEIVED, response.data);
   },
 
-  async doSort({ commit }) {
-    const response = await sortMusic();
+  async doSort({ commit }, { id, order }) {
+    const response = await sortMusic(id, order);
     commit(types.SORTED_ACTIVITIES_RECEIVED, response.data);
   },
 
-  async doFilter({ commit }) {
-    const response = await filterMusic();
+  async doFilter({ commit }, query) {
+    const response = await filterMusic(query);
     commit(types.FILTERED_ACTIVITIES_RECEIVED, response.data);
   },
 
+  async switchPage({ commit }) {
+    console.log('CHANGE PAGE');
+  },
+
   async doChange({ commit }) {
-    const response = await saveMusic();
-    commit(types.ACTIVITY_CHANGED, response.data);
+    console.log('SAVING');
+    // const response = await saveMusic();
+    // commit(types.ACTIVITY_CHANGED, response.data);
   }
 };
 
 const mutations = {
-  [types.SORTED_ACTIVITIES_RECEIVED](currState, activities) {
-    currState.activities = activities;
+  [types.SORTED_ACTIVITIES_RECEIVED](currState, songs) {
+    currState.songs = songs;
   },
 
-  [types.FILTERED_ACTIVITIES_RECEIVED](currState, activities) {
-    currState.activities = activities;
+  [types.FILTERED_ACTIVITIES_RECEIVED](currState, songs) {
+    currState.songs = songs;
   },
 
-  [types.ACTIVITY_CHANGED](currState, activity) {
-    currState.activities = activity;
+  [types.ACTIVITY_CHANGED](currState, songs) {
+    currState.songs = songs;
   },
 
   [types.MUSIC_RECEIVED](currState, songs) {

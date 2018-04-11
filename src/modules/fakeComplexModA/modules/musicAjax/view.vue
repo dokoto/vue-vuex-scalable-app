@@ -2,25 +2,29 @@
 <template>
   <section class="gridAjax">
     <div class="filters">
-      <input type="text"
-             class="filter"
-             @change="doFilter" />
+      <label for="filter">Filtro por Nombre
+        <input type="text"
+          name="filter"
+          v-model="filterValue"
+          class="filter" />
+         <button @click="doFilter(filterValue)">filtrar</button>
+      </label>
     </div>
     <Table :collection="songs">
-      <Header @onSort="doSort"
-              slot="head" />
+      <Header slot="head"
+        :headerFields="['Name', 'Composer']"
+        @sortClick="doSort" />
 
       <template slot="row"
-                slot-scope="slot">
-        <div class="header">
-          <span class="field">{{ slot.item.Composer || "-" }}</span>
-          <span class="field">{{ slot.item.Name }}</span>
-        </div>
+        slot-scope="row">
+        <Row :item="row.item"
+          @rowClick="doChange" />
       </template>
 
-      <Footer :page="pages.index"
-              :totalPages="pages.total"
-              slot="footer" />-->
+      <Footer slot="footer"
+        :page="pages.index"
+        :totalPages="pages.total"
+        @switchPageClick="switchPage" />
     </Table>
   </section>
 </template>
@@ -28,33 +32,40 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Table from '@/common/components/Table';
-import Header from './components/Header';
+import Header from '@/common/components/TableHeader';
 import Row from './components/Row';
 import Footer from './components/Footer';
 
 export default {
   components: { Table, Header, Row, Footer },
   computed: {
-    ...mapState('fakeComplexModA/musicAjax', ['songs', 'pages'])
+    ...mapState('fakeComplexModA/musicAjax', ['songs', 'pages']),
   },
   methods: {
-    ...mapActions('fakeComplexModA/musicAjax', [
-      'doSort',
-      'doChange',
-      'doFilter'
-    ])
+    ...mapActions('fakeComplexModA/musicAjax', ['doSort', 'doChange', 'doFilter', 'switchPage']),
+  },
+  data: function() {
+    return {
+      filterValue: ''
+    }
   },
   created() {
     this.$store.dispatch('fakeComplexModA/musicAjax/getTracks');
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.gridAjax {
-  border: solid 1px;
-  height: 200px;
-  padding: 2%;
-  margin: 1%;
+.filters {
+  margin: 2%;
+  input {
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-size: 14px;
+  }
+}
+body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
 }
 </style>
