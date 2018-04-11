@@ -1,15 +1,16 @@
 const toggles = {
   home: true,
-  'fakeComplexModA:fakeSubModA': false,
+  'fakeComplexModA:musicAjax': true,
   'fakeComplexModA:fakeSubModB': true,
   fakeComplexModB: true,
   'fakeComplexModB:fakeSubModA': true,
   'fakeComplexModB:fakeSubModB': false
 };
 function handleTokens(masterToken, headers) {
+  debugger;
   if (
-    !headers.authorization &&
-    headers.authorization.split[0].toLocaleLowerCase() === 'bearer' &&
+    !headers.authorization ||
+    headers.authorization.split[0].toLocaleLowerCase() !== 'bearer' ||
     headers.authorization.split[1] !== masterToken
   ) {
     return {

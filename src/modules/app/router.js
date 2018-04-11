@@ -4,8 +4,8 @@ import toggle from '@/common/utils/modules';
 import Auth from '../auth/view';
 
 const Home = () => import(/* webpackChunkName: 'Home' */ '../home/view.vue');
-const fakeComplexModAFakeSubModA = () =>
-  import(/* webpackChunkName: 'fakeComplexModAFakeSubModA' */ '../fakeComplexModA/modules/fakeSubModA/view.vue');
+const fakeComplexModAMusicAjax = () =>
+  import(/* webpackChunkName: 'musicAjax' */ '../fakeComplexModA/modules/musicAjax/view.vue');
 const fakeComplexModAFakeSubModB = () =>
   import(/* webpackChunkName: 'fakeComplexModAFakeSubModB' */ '../fakeComplexModA/modules/fakeSubModB/view.vue');
 const fakeComplexModB = () =>
@@ -31,12 +31,12 @@ export default new Router({
       components: { container: toggle('home', Home) }
     },
     {
-      name: 'fakeComplexModA:fakeSubModA',
-      path: '/fakeComplexModA/fakeSubModA',
+      name: 'fakeComplexModA:musicAjax',
+      path: '/fakeComplexModA/musicAjax',
       components: {
         container: toggle(
-          'fakeComplexModA:fakeSubModA',
-          fakeComplexModAFakeSubModA
+          'fakeComplexModA:musicAjax',
+          fakeComplexModAMusicAjax
         )
       }
     },

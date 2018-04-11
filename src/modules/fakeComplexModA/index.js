@@ -1,10 +1,10 @@
-import fakeSubModA from './modules/fakeSubModA/logic/store';
+import musicAjax from './modules/musicAjax/logic/store';
 import fakeSubModB from './modules/fakeSubModB/logic/store';
 
 export default {
   namespaced: true,
   modules: {
-    fakeSubModA,
+    musicAjax,
     fakeSubModB
   }
 };

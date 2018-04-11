@@ -12,6 +12,7 @@
     "start-docs": "npm run generate-docs && npm run docs-deploy",
     "build": "node build/build.js",
     "mocker": "node test/json-server/mocker.js",
+    "mocker-musicDb": "json-server --id Id --watch test/json-server/musicDb.json",
     "deploy": "node_modules/serve/bin/serve.js -s dist",
     "unit": "jest --config test/unit/jest.conf.js",
     "unit-verbose": "jest --config test/unit/jest.conf.js --verbose",

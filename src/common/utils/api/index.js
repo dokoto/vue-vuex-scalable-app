@@ -86,3 +86,8 @@ export function getToogles() {
     headers: { ...bearerAuth(process.env.VUE_APP_MASTER_TOKEN) }
   });
 }
+
+
+export function getTracks() {
+  return Get.fetch(paths.tracks);
+}
