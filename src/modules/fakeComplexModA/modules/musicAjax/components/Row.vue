@@ -1,16 +1,27 @@
-<template >
-  <div class="row"
-       :key="item.Id">
-    <span class="field">{{ item.Composer || "-" }}</span>
-    <span class="field">{{ item.Name }}</span>
-    <span class="field">{{ item.album.Title }}</span>
-    <span class="field">{{ item.genre.Name }}</span>
-    <span class="field">{{ item.UnitPrice }}</span>
-  </div>
+<template>
+  <tr class="row"
+    :key="item.Id"
+    @click="triggerClick">
+    <td>{{ item.Name }}</td>
+    <td>{{ item.Composer || "-" }}</td>
+  </tr>
 </template>
 
 <script>
 export default {
-  props: ['item']
-}
+  props: ['item'],
+  methods: {
+    triggerClick() {
+      this.$emit('rowClick');
+    },
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+th,
+td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
+</style>

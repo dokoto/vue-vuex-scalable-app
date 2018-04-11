@@ -1,15 +1,20 @@
-<template functional>
+<template>
   <div class="footer">
     <button class="btn prev"
-            @click="prev">prev</button>
+      @click="triggerSwitchPage">prev</button>
     {{ page }} / {{ totalPages }}
     <button class="btn next"
-            @click="next">next</button>
+      @click="triggerSwitchPage">next</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['page', 'totalPages']
+  props: ['page', 'totalPages'],
+  methods: {
+    triggerSwitchPage() {
+      this.$emit('switchPageClick');
+    },
+  },
 };
 </script>

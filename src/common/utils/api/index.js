@@ -89,5 +89,13 @@ export function getToogles() {
 
 
 export function getTracks() {
-  return Get.fetch(paths.tracks);
+  return Get.fetch(`${paths.tracks}&_sort=Name&_order=asc`);
+}
+
+export function sortMusic(fieldName, order = 'desc') {
+  return Get.fetch(`${paths.tracks}&_sort=${fieldName}&_order=${order === 'desc' ? 'desc' : 'asc'}`);
+}
+
+export function filterMusic(query) {
+  return Get.fetch(`${paths.tracks}${query ? `&Name_like=${query}` : ''}`);
 }
