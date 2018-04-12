@@ -4,10 +4,10 @@ import toggle from '@/common/utils/modules';
 import Auth from '../auth/view';
 
 const Home = () => import(/* webpackChunkName: 'Home' */ '../home/view.vue');
-const fakeComplexModAMusicAjax = () =>
-  import(/* webpackChunkName: 'musicAjax' */ '../fakeComplexModA/modules/musicAjax/view.vue');
-const fakeComplexModAFakeSubModB = () =>
-  import(/* webpackChunkName: 'fakeComplexModAFakeSubModB' */ '../fakeComplexModA/modules/fakeSubModB/view.vue');
+const musicAjax = () =>
+  import(/* webpackChunkName: 'musicAjax' */ '../music/modules/ajax/view.vue');
+const musicLocal = () =>
+  import(/* webpackChunkName: 'musicLocal' */ '../music/modules/local/view.vue');
 const fakeComplexModB = () =>
   import(/* webpackChunkName: 'FakeComplexModB' */ '../fakeComplexModB/view.vue');
 const FakeComplexModBFakeSubModA = () =>
@@ -31,22 +31,22 @@ export default new Router({
       components: { container: toggle('home', Home) }
     },
     {
-      name: 'fakeComplexModA:musicAjax',
-      path: '/fakeComplexModA/musicAjax',
+      name: 'music:ajax',
+      path: '/music/ajax',
       components: {
         container: toggle(
-          'fakeComplexModA:musicAjax',
-          fakeComplexModAMusicAjax
+          'music:ajax',
+          musicAjax
         )
       }
     },
     {
-      name: 'fakeComplexModA:fakeSubModB',
-      path: '/fakeComplexModA/fakeSubModB',
+      name: 'music:local',
+      path: '/music/local',
       components: {
         container: toggle(
-          'fakeComplexModA:fakeSubModB',
-          fakeComplexModAFakeSubModB
+          'music:local',
+          musicLocal
         )
       }
     },

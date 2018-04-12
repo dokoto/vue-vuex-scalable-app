@@ -32,15 +32,15 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { Body, Header, Footer, Row } from '@/common/components/Table/index';
+import { Body, Header, Footer, Row } from '@/common/components/Table/all';
 
 export default {
   components: { Body, Header, Row, Footer },
   computed: {
-    ...mapState('fakeComplexModA/musicAjax', ['songs', 'pages'])
+    ...mapState('music/ajax', ['songs', 'pages'])
   },
   methods: {
-    ...mapActions('fakeComplexModA/musicAjax', [
+    ...mapActions('music/ajax', [
       'doSort',
       'doChange',
       'doFilter',
@@ -53,7 +53,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch('fakeComplexModA/musicAjax/getTracks');
+    this.$store.dispatch('music/ajax/getTracks');
   }
 };
 </script>

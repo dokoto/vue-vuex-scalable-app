@@ -2,12 +2,12 @@
   <thead>
     <tr>
       <th v-for="headerField in headerFields"
-        :key="headerField"
-        :id="headerField"
-        :class="orderBy[headerField] === 'asc' ? 'asc' : 'desc'"
-        @click="triggerSort">{{ headerField }}
+          :key="headerField"
+          :id="headerField"
+          :class="orderBy[headerField] === 'asc' ? 'asc' : 'desc'"
+          @click="triggerSort">{{ headerField }}
         <span class="arrow"
-          :class="orderBy[headerField] === 'asc' ? 'asc' : 'desc'">
+              :class="orderBy[headerField] === 'asc' ? 'asc' : 'desc'">
         </span>
       </th>
     </tr>
@@ -23,18 +23,18 @@ export default {
         this.orderBy[ev.currentTarget.id] === 'asc' ? 'desc' : 'asc';
       this.$emit('sortClick', {
         id: ev.currentTarget.id,
-        order: this.orderBy[ev.currentTarget.id],
+        order: this.orderBy[ev.currentTarget.id]
       });
-    },
+    }
   },
   data: function() {
     return {
-      orderBy: this.headerFields.reduce((curr, next) => {
-        curr[next] = 'asc';
-        return curr;
-      }, {}),
+      orderBy: this.headerFields.reduce(
+        (curr, next) => ({ [next]: 'asc', ...curr }),
+        {}
+      )
     };
-  },
+  }
 };
 </script>
 

@@ -1,55 +1,59 @@
+import { accendingSort, descendingSort } from '@/common/utils/functionalCb';
 import { getTracks, modifyTrack } from '@/common/utils/api';
 import * as types from './types';
 
 const state = {
   songs: [],
+  filterSongs: [],
   pages: {
-    index: 0,
+    index: 1,
     total: 0
   },
   filters: {
-    _limit: 10,
-    _page: 1
+    query: '',
+    limit: 10
+  }
+};
+
+const getters = {
+  songsByPage: currState => {
+    if (currState.filters.query) {
+      return currState.filterSongs;
+    }
+    return currState.songs.slice(
+      ((currState.pages.index - 1) * currState.filters.limit),
+      ((currState.pages.index - 1) * currState.filters.limit) +
+        currState.filters.limit
+    );
   }
 };
 
 const actions = {
   async getTracks({ commit }) {
-    const response = await getTracks(state.filters);
+    const response = await getTracks();
     commit(types.SONGS_RECEIVED, response.data);
     commit(types.REFRESH_PAGES, {
       index: 1,
-      total: response.headers['x-total-count']
+      total: response.data.length
     });
   },
 
   async doSort({ commit }, { id, order }) {
-    const filters = Object.assign({}, state.filters, {
-      _sort: id,
-      _order: order,
-      _page: 1
-    });
-    const response = await getTracks(filters);
-    commit(types.SORTED_SONGS_RECEIVED, response.data);
+    commit(types.SORTED_SONGS_RECEIVED, { id, order });
     commit(types.REFRESH_PAGES, {
-      index: 0,
-      total: response.headers['x-total-count']
+      index: 1
     });
-    commit(types.CHANGE_FILTERS, filters);
   },
 
   async doFilter({ commit }, query) {
-    const filters = Object.assign({}, state.filters, {
-      Name_like: query,
-      _page: 1
-    });
-    const response = await getTracks(filters);
-    commit(types.FILTERED_SONGS_RECEIVED, response.data);
+    const filterSongs = query
+      ? state.songs.filter(item => item.Name && item.Name.includes(query))
+      : [];
+    commit(types.FILTERED_SONGS_RECEIVED, { query, filterSongs });
     commit(types.REFRESH_PAGES, {
       index: 1,
-      total: response.headers['x-total-count']
+      total: filterSongs.length ? filterSongs.length : state.songs.length
     });
-    commit(types.CHANGE_FILTERS, filters);
   },
 
   async switchPage({ commit }, id) {
@@ -60,12 +64,8 @@ const actions = {
       index = state.pages.index + 1;
     }
     if (index !== state.pages.index) {
-      const filters = Object.assign({}, state.filters, { _page: index });
-      const response = await getTracks(filters);
-      commit(types.SWITCHED_PAGE, response.data);
       commit(types.REFRESH_PAGES, {
-        index,
-        total: response.headers['x-total-count']
+        index
       });
     }
   },
@@ -78,12 +78,21 @@ const actions = {
 };
 
 const mutations = {
-  [types.SORTED_SONGS_RECEIVED](currState, songs) {
-    currState.songs = songs;
+  [types.SORTED_SONGS_RECEIVED](currState, { order, id }) {
+    if (currState.filterSongs.length) {
+      currState.filterSongs = currState.filterSongs.sort(
+        order === 'asc' ? accendingSort(id) : descendingSort(id)
+      );
+    } else {
+      currState.songs = currState.songs.sort(
+        order === 'asc' ? accendingSort(id) : descendingSort(id)
+      );
+    }
   },
 
-  [types.FILTERED_SONGS_RECEIVED](currState, songs) {
-    currState.songs = songs;
+  [types.FILTERED_SONGS_RECEIVED](currState, { query, filterSongs }) {
+    currState.filters.query = query;
+    currState.filterSongs = filterSongs;
   },
 
   [types.SWITCHED_PAGE](currState, songs) {
@@ -100,7 +109,7 @@ const mutations = {
   },
 
   [types.SONGS_RECEIVED](currState, songs) {
-    currState.songs = songs;
+    currState.songs = songs.sort(accendingSort('Name'));
   },
 
   [types.CHANGE_FILTERS](currState, filters) {
@@ -119,5 +128,6 @@ export default {
   namespaced: true,
   actions,
   mutations,
-  state
+  state,
+  getters
 };

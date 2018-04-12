@@ -7,7 +7,7 @@ import Vuex from 'vuex';
 import { getToogles } from '@/common/utils/api';
 import * as types from './types';
 import auth from '../../auth/logic/store';
-import fakeComplexModA from '../../fakeComplexModA';
+import music from '../../music';
 import fakeComplexModB from '../../fakeComplexModB/logic/store';
 
 Vue.use(Vuex);
@@ -49,7 +49,7 @@ const store = new Vuex.Store({
   modules: {
     app,
     auth,
-    fakeComplexModA,
+    music,
     fakeComplexModB
   },
   strict: process.env.ENV !== 'production'

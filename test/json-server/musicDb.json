@@ -150,7 +150,7 @@
       "genreId": "1",
       "mediatypeId": "2",
       "Milliseconds": "342562",
-      "Name": "Balls to the Wall--",
+      "Name": "Balls to the Wall",
       "Id": "2",
       "UnitPrice": "0.99",
       "field": "Balls to the Wall"
@@ -32227,7 +32227,7 @@
       "genreId": "19",
       "mediatypeId": "3",
       "Milliseconds": "2782333",
-      "Name": "\"?\"",
+      "Name": "La farandula",
       "Id": "2918",
       "UnitPrice": "1.99"
     },
@@ -33620,7 +33620,7 @@
     {
       "albumId": "241",
       "Bytes": "6905623",
-      "Composer": "",
+      "Composer": "Satan and me",
       "genreId": "8",
       "mediatypeId": "1",
       "Milliseconds": "207568",

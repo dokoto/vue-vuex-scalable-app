@@ -2,10 +2,10 @@
   <ul class="menu">
     <ul class="menu">
       <li>
-        <router-link to="/fakeComplexModA/musicAjax">/fakeComplexModA/musicAjax</router-link>
+        <router-link to="/music/ajax">/music/ajax</router-link>
       </li>
       <li>
-        <router-link to="/fakeComplexModA/FakeSubModB">/fakeComplexModA/FakeSubModB</router-link>
+        <router-link to="/music/local">/music/local</router-link>
       </li>
     </ul>
     <li>
