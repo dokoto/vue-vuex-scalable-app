@@ -1,12 +1,15 @@
 <template>
-  <tfoot class="footer" align="center">
+  <tfoot class="footer"
+         align="center">
     <tr>
       <td colspan="2">
-        <button id="prev" class="btn prev"
-                @click="triggerSwitchPage">prev</button>
+        <button id="prev"
+                class="btn prev"
+                @click="e => $emit('switchPageClick', e.currentTarget.id)">prev</button>
         {{ page }} / {{ totalPages }}
-        <button id="next" class="btn next"
-                @click="triggerSwitchPage">next</button>
+        <button id="next"
+                class="btn next"
+                @click="e => $emit('switchPageClick', e.currentTarget.id)">next</button>
       </td>
     </tr>
   </tfoot>
@@ -14,12 +17,7 @@
 
 <script>
 export default {
-  props: ['page', 'totalPages'],
-  methods: {
-    triggerSwitchPage(ev) {
-      this.$emit('switchPageClick', ev.currentTarget.id);
-    }
-  }
+  props: ['page', 'totalPages']
 };
 </script>
 
