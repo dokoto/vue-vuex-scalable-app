@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ['collection'],
+  props: ['collection']
 };
 </script>
 

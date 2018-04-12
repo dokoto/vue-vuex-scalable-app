@@ -3,7 +3,7 @@
  */
 
 import * as paths from './paths';
-import { Post, Get } from './req';
+import { Post, Get, Put } from './req';
 
 /**
  * @public
@@ -87,15 +87,15 @@ export function getToogles() {
   });
 }
 
+export function getTracks(filters = {}) {
+  const url = Object.entries(filters).reduce((curr, next, index) => {
+    const [key, value] = next;
+    return !index ? `${curr}?${key}=${value}` : `${curr}&${key}=${value}`;
+  }, paths.tracks);
 
-export function getTracks() {
-  return Get.fetch(`${paths.tracks}&_sort=Name&_order=asc`);
+  return Get.fetch(url);
 }
 
-export function sortMusic(fieldName, order = 'desc') {
-  return Get.fetch(`${paths.tracks}&_sort=${fieldName}&_order=${order === 'desc' ? 'desc' : 'asc'}`);
-}
-
-export function filterMusic(query) {
-  return Get.fetch(`${paths.tracks}${query ? `&Name_like=${query}` : ''}`);
+export function modifyTrack(id, track) {
+  Put.fetch(`${paths.tracks}/${id}`, { body: track });
 }

@@ -1,57 +1,60 @@
-// https://vuejs.org/v2/examples/grid-component.html
 <template>
   <section class="gridAjax">
     <div class="filters">
       <label for="filter">Filtro por Nombre
         <input type="text"
-          name="filter"
-          v-model="filterValue"
-          class="filter" />
-         <button @click="doFilter(filterValue)">filtrar</button>
+               name="filter"
+               v-model="filterValue"
+               class="filter"
+               @keyup.enter="doFilter(filterValue)" />
+        <button @click="doFilter(filterValue)">filtrar</button>
       </label>
     </div>
-    <Table :collection="songs">
+    <Body :collection="songs">
       <Header slot="head"
-        :headerFields="['Name', 'Composer']"
-        @sortClick="doSort" />
+              :headerFields="['Name', 'Composer']"
+              @sortClick="doSort" />
 
       <template slot="row"
-        slot-scope="row">
+                slot-scope="row">
         <Row :item="row.item"
-          @rowClick="doChange" />
+             :fields="['Name', 'Composer']"
+             @rowClick="doChange" />
       </template>
 
       <Footer slot="footer"
-        :page="pages.index"
-        :totalPages="pages.total"
-        @switchPageClick="switchPage" />
-    </Table>
+              :page="pages.index"
+              :totalPages="pages.total"
+              @switchPageClick="switchPage" />
+    </Body>
   </section>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Table from '@/common/components/Table';
-import Header from '@/common/components/TableHeader';
-import Row from './components/Row';
-import Footer from './components/Footer';
+import { Body, Header, Footer, Row } from '@/common/components/Table/index';
 
 export default {
-  components: { Table, Header, Row, Footer },
+  components: { Body, Header, Row, Footer },
   computed: {
-    ...mapState('fakeComplexModA/musicAjax', ['songs', 'pages']),
+    ...mapState('fakeComplexModA/musicAjax', ['songs', 'pages'])
   },
   methods: {
-    ...mapActions('fakeComplexModA/musicAjax', ['doSort', 'doChange', 'doFilter', 'switchPage']),
+    ...mapActions('fakeComplexModA/musicAjax', [
+      'doSort',
+      'doChange',
+      'doFilter',
+      'switchPage'
+    ])
   },
   data: function() {
     return {
       filterValue: ''
-    }
+    };
   },
   created() {
     this.$store.dispatch('fakeComplexModA/musicAjax/getTracks');
-  },
+  }
 };
 </script>
 

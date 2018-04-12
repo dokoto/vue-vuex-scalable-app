@@ -21,6 +21,6 @@ export const signup = `${process.env.VUE_APP_API_HOST}/login/signup`;
 export const toggles = `${process.env.VUE_APP_API_HOST}/toggles`;
 
 
-export const tracks = `${process.env.VUE_APP_API_HOST}/tracks?_limit=25`;
+export const tracks = `${process.env.VUE_APP_API_HOST}/tracks`;
 export const albums = `${process.env.VUE_APP_API_HOST}/albums`;
 export const genres = `${process.env.VUE_APP_API_HOST}/genres`;

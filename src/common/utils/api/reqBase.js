@@ -11,9 +11,13 @@ class ReqBase {
    * @param {module:Common/Utils/api/request~jsend} response jsend object type
    */
   static success(response) {
+    const headers = {};
+    response.headers.forEach((v, k) => {
+      headers[k] = v;
+    });
     return response
       .json()
-      .then(data => ({ status: STATUS.SUCCESS, data }))
+      .then(data => ({ status: STATUS.SUCCESS, data, headers }))
       .catch(err => ({ status: STATUS.ERROR, message: err.message }));
   }
 
