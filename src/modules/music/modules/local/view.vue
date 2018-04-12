@@ -10,15 +10,18 @@
         <button @click="doFilter(filterValue)">filtrar</button>
       </label>
     </div>
-    <Body :collection="songsByPage">
-      <Header slot="head"
-              :headerFields="['Name', 'Composer']"
-              @sortClick="doSort" />
 
+    <Body :collection="songsByPage"
+          :header="['Name', 'Composer']">
+      <template slot="head"
+                slot-scope="row">
+        <Header :header="row.header"
+                @sortClick="doSort" />
+      </template>
       <template slot="row"
                 slot-scope="row">
         <Row :item="row.item"
-             :fields="['Name', 'Composer']"
+             :header="row.header"
              @rowClick="doChange" />
       </template>
 

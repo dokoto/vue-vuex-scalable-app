@@ -1,7 +1,7 @@
 <template>
   <thead>
     <tr>
-      <th v-for="headerField in headerFields"
+      <th v-for="headerField in header"
           :key="headerField"
           :id="headerField"
           :class="orderBy[headerField] === 'asc' ? 'asc' : 'desc'"
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['headerFields'],
+  props: ['header'],
   methods: {
     triggerSort(ev) {
       this.orderBy[ev.currentTarget.id] =
@@ -29,7 +29,7 @@ export default {
   },
   data: function() {
     return {
-      orderBy: this.headerFields.reduce(
+      orderBy: this.header.reduce(
         (curr, next) => ({ [next]: 'asc', ...curr }),
         {}
       )

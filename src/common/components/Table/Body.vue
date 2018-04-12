@@ -1,16 +1,16 @@
 <template>
   <table>
-    <slot name="head" />
+    <slot name="head" :header="header"/>
     <slot name="row"
       v-for="item in collection"
-      :item="item" />
+      :item="item" :header="header"/>
     <slot name="footer" />
   </table>
 </template>
 
 <script>
 export default {
-  props: ['collection']
+  props: ['collection', 'header']
 };
 </script>
 

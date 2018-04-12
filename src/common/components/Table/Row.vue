@@ -1,7 +1,7 @@
 <template>
   <tr class="row"
       :data-id="item.Id">
-    <td v-for="field in fields"
+    <td v-for="field in header"
         :key="field">
       <input :value="item[field]"
              :data-field="field"
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ['item', 'fields'],
+  props: ['item', 'header'],
   methods: {
     triggerClick() {
       this.$emit('rowClick');
